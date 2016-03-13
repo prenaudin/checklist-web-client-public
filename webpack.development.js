@@ -4,7 +4,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   context: __dirname,
-  entry: ['./src/index.js', './assets/stylesheets/application.scss'],
+  entry: ['./src/index.js', './css/application.css'],
   output: {
     path: path.resolve(__dirname, "dist"),
     publicPath: '/',
@@ -13,10 +13,10 @@ module.exports = {
   resolve: {
     root: [
       path.join(__dirname, 'src'),
-      path.join(__dirname, 'assets', 'stylesheets'),
-      path.join(__dirname, 'assets', 'images'),
+      path.join(__dirname, 'css'),
+      path.join(__dirname, 'images'),
     ],
-    extensions: ['', '.js', '.scss', '.svg'],
+    extensions: ['', '.js', '.css', '.svg'],
   },
   module: {
     loaders: [
@@ -26,14 +26,33 @@ module.exports = {
         loader: 'babel?presets[]=react,presets[]=es2015'
       },
       {
-        test: /\.scss$/,
-        loader: 'style!css!sass'
+        test: /\.css$/,
+        loader: 'style-loader!css-loader!postcss-loader'
       },
       {
         test: /.*\.(gif|png|jpe?g|svg)$/i,
         loader: 'file?hash=sha512&digest=hex&name=[hash].[ext]'
       }
     ],
+  },
+  postcss: function() {
+    return [
+      require('postcss-import')({ // Import all the css files...
+        glob: true,
+        onImport: function (files) {
+          files.forEach(this.addDependency); // ...and add dependecies from the main.css files to the other css files...
+        }.bind(this) // ...so they get hot–reloaded when something changes...
+      }),
+      require('postcss-nested')(),
+      require('postcss-simple-vars')(), // ...then replace the variables...
+      require('postcss-focus')(), // ...add a :focus to ever :hover...
+      require('autoprefixer')({ // ...and add vendor prefixes...
+        browsers: ['last 2 versions', 'IE > 8'] // ...supporting the last 2 major browser versions and IE 8 and up...
+      }),
+      require('postcss-reporter')({ // This plugin makes sure we get warnings in the console
+        clearMessages: true
+      })
+    ];
   },
   plugins: [
     new HtmlWebpackPlugin({

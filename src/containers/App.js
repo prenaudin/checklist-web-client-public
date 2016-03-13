@@ -10,40 +10,39 @@ import * as ChecklistActions from '../actions/checklists'
 
 class App extends Component {
   componentDidMount() {
-    this.props.actions.validateToken()
+    this.props.actions.validateToken();
   }
 
   render() {
-    const { projects, actions } = this.props
     return (
       <div className="app">
         {this.props.header || <Header {...this.props}/>}
         {this.props.content || this.props.children}
         <Footer/>
       </div>
-    )
+    );
   }
 }
 
 App.propTypes = {
   projects: PropTypes.instanceOf(Immutable.Map).isRequired,
-  actions: PropTypes.object.isRequired
-}
+  actions: PropTypes.object.isRequired,
+};
 
 function mapStateToProps(state) {
   return {
     projects: state.projects,
-    checklists: state.checklists
-  }
+    checklists: state.checklists,
+  };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(AccountActions, dispatch)
-  }
+    actions: bindActionCreators(AccountActions, dispatch),
+  };
 }
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(App)
+)(App);

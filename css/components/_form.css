@@ -1,0 +1,68 @@
+.form-group {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.form-title {
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.form-input {
+  border-radius: 2px;
+  height: 58px;
+  padding: 10px 16px;
+  outline: 0;
+  background: $white;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.18);
+  width: 100%;
+  &:focus {
+    border-color: $purple;
+  }
+}
+
+.form-input--lg {
+  font-size: 26px;
+}
+
+.form-input--md {
+  font-size: 16px;
+}
+
+.form-actions {
+  text-align: right;
+}
+
+.form-resume {
+  line-height: 30px;
+  > .form-resume-count {
+    font-size: 30px;
+    font-weight: 300;
+  }
+  > .form-resume-subtitle {
+    opacity: 0.5;
+    font-size: 12px;
+    line-height: 16px;
+  }
+}
+
+.form-footer-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: $white;
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.2);
+  > .form-footer {
+    max-width: 784px;
+    margin: 0 auto;
+    padding: 26px 0;
+    > .form-resume {
+      float: left;
+    }
+    > .form-actions {
+      float: right;
+    }
+  }
+}

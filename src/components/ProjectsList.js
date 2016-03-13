@@ -11,7 +11,7 @@ class ProjectsList extends React.Component {
 
   render() {
     return (
-      <ul className="projects-list">
+      <ul className="projects-list clearfix">
         <li className='projects-list-item projects-list-item--new'>
           <Link
             to={`/projects/new`}

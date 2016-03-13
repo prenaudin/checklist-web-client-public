@@ -1,0 +1,41 @@
+.header {
+  overflow: auto;
+  padding: 34px 0;
+}
+
+.header-title {
+  float: left;
+  font-size: 16px;
+  font-weight: 500;
+  &.header-title--brand {
+    opacity: 1;
+  }
+}
+
+.header-infos {
+  float: right;
+}
+
+.header-breadcrumbs-item {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  opacity: 0.4;
+  color: $black;
+}
+
+a.header-breadcrumbs-item {
+  &:hover {
+    opacity: 0.6;
+  }
+}
+
+.header-breadcrumbs-item + .header-breadcrumbs-item {
+  margin-left: 40px;
+  &:before {
+    content: ">";
+    position: absolute;
+    left: -24px;
+    opacity: 0.4;
+  }
+}

@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import Router from './components/Router';
 import store from './store/store';
-require('../assets/stylesheets/application.scss');
+require('application.css');
 
 render(
   <Provider store={store}>

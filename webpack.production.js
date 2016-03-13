@@ -11,6 +11,7 @@ var mainConfig = require('./webpack.development.js');
 
 mainConfig.output = {
   path: path.join(__dirname, 'public'),
+  publicPath: '/',
   filename: 'application-[chunkhash].js',
 };
 

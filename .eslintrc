@@ -8,7 +8,7 @@ plugins:
 
 env:
   browser: true
-  node: true
+  node: false
 
 rules:
   indent: [1, 2, { SwitchCase: 1, VariableDeclarator: 2 }]

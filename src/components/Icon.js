@@ -1,5 +1,5 @@
 import React from 'react';
-const iconsImgSrc = require('../../assets/images/icons.svg');
+const iconsImgSrc = require('icons.svg');
 
 class Icon extends React.Component {
 

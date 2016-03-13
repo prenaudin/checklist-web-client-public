@@ -3,8 +3,11 @@
   "license": "ISC",
   "repository": ".git",
   "scripts": {
-    "start": "node index.js",
-    "dev": "$(npm bin)/webpack-dev-server --config ./webpack.development.js --hot --progress --inline",
+    "start": "if [ \"$NODE_ENV\" = \"production\" ]; then npm run serve-prod; else npm run serve-dev; fi",
+    "postinstall": "if [ \"$NODE_ENV\" = \"production\" ]; then npm run build; fi",
+    "build": "$(npm bin)/webpack --config ./webpack.production.js --progress --cheap-eval-source-map",
+    "serve-dev": "NODE_ENV=development $(npm bin)/webpack-dev-server --config ./webpack.development.js --hot --progress --inline --history-api-fallback --cheap-eval-source-map",
+    "serve-prod": "NODE_ENV=production node server.prod.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "npm run eslint",
     "eslint": "eslint --ext .js,.jsx ."
@@ -13,6 +16,7 @@
     "node": "5.3.0"
   },
   "dependencies": {
+    "axios": "^0.9.1",
     "babel-core": "^6.3.26",
     "babel-eslint": "^4.1.6",
     "babel-loader": "^6.2.0",
@@ -31,6 +35,7 @@
     "extract-text-webpack-plugin": "^0.9.1",
     "file-loader": "^0.8.5",
     "history": "1.13.0",
+    "html-webpack-plugin": "^2.10.0",
     "humps": "^1.0.0",
     "immutable": "^3.7.6",
     "imports-loader": "^0.6.5",

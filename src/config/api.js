@@ -1,3 +1,3 @@
 export default {
-  endpoint: 'https://checklisttt.herokuapp.com',
+  endpoint: 'https://checklist-web-api.herokuapp.com',
 };

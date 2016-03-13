@@ -1,65 +1,56 @@
+/*eslint-disable*/
 var webpack = require('webpack');
 var path = require('path');
 
 var ManifestPlugin = require('webpack-manifest-plugin');
-
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var extractApplicationStyle = new ExtractTextPlugin('application-[contenthash].css');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
-var dist = path.join(__dirname, '../', '../');
+var mainConfig = require('./webpack.development.js');
 
-module.exports = {
-  context: dist,
-  entry: [
-    './app/frontend/javascripts/index.js',
-    './app/frontend/stylesheets/application.scss',
-  ],
-
-  resolve: {
-    root: [
-      path.join(dist, 'app', 'frontend', 'javascripts'),
-      path.join(dist, 'app', 'frontend', 'stylesheets')
-    ],
-    extensions: ['', '.webpack.js', '.web.js', '.js', '.jsx', '.sass', 'config.js'],
-  },
-
-  output: {
-    path: path.join(dist, 'public', 'assets'),
-    filename: 'application-[chunkhash].js',
-  },
-
-  module: {
-    loaders: [
-      {
-        test: /\.js$/,
-        loaders: [
-          'babel?presets[]=react,presets[]=es2015'
-        ]
-      },
-      {
-        test: /\.scss$/,
-        loader: extractApplicationStyle.extract(['css', 'sass'])
-      },
-      {
-        test: /\.(svg|png)$/,
-        include: path.join(dist, 'app', 'frontend', 'images'),
-        loader: 'file',
-        query: {
-          name: '[path][name]-[hash].[ext]',
-          context: path.join(dist, 'app', 'frontend', 'images')
-        }
-      } 
-    ]
-  },
-
-  plugins: [
-    extractApplicationStyle,
-    new webpack.optimize.UglifyJsPlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.ProvidePlugin({
-      'Promise': 'es6-promise',
-      'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
-    }),
-    new ManifestPlugin()
-  ]
+mainConfig.output = {
+  path: path.join(__dirname, 'public'),
+  filename: 'application-[chunkhash].js',
 };
+
+mainConfig.plugins = [
+  extractApplicationStyle,
+  new webpack.optimize.UglifyJsPlugin(),
+  new webpack.optimize.OccurenceOrderPlugin(),
+  // new webpack.ProvidePlugin({
+  //   'Promise': 'es6-promise',
+  //   'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+  // }),
+  new ManifestPlugin(),
+  new HtmlWebpackPlugin({
+    template: 'index.ejs',
+    title: 'Checklist',
+    mobile: true,
+    minify: { // Minifying it while it is parsed
+      removeComments: true,
+      collapseWhitespace: true,
+      removeRedundantAttributes: true,
+      useShortDoctype: true,
+      removeEmptyAttributes: true,
+      removeStyleLinkTypeAttributes: true,
+      keepClosingSlash: true,
+      minifyJS: true,
+      minifyCSS: true,
+      minifyURLs: true
+    },
+    appMountId: 'app-container',
+    window: {
+      env: {
+        apiHost: 'http://checklist-web-api.herokuapp.com'
+      }
+    }
+  }),
+  new webpack.DefinePlugin({
+    "process.env": {
+      NODE_ENV: JSON.stringify("production")
+    }
+  })
+];
+
+module.exports = mainConfig;

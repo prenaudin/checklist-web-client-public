@@ -1,3 +1,6 @@
+import axios from 'axios';
+import _ from 'lodash';
+
 import {flattenResponse, decamelizeKeys} from '../utils/APIHelpers';
 import configApi from '../config/api';
 
@@ -14,32 +17,35 @@ const setTokens = (tokens) => {
   localStorage.setItem('checklyst:auth:uidToken', uidToken);
 };
 
-const send = (method, url, body) => {
-  const headers = new Headers({
+const send = (method, url, data) => {
+  const headers = {
     'Content-Type': 'application/json',
-    'client': clientToken,
-    'access-token': accessToken,
-    'uid': uidToken,
-    'token-type': 'Bearer',
-  });
+    'Accept': 'application/json',
+  };
 
-  return window.fetch(configApi.endpoint + url, {
+  if (clientToken && accessToken && uidToken) {
+    _.extend(headers, {
+      'client': clientToken,
+      'access-token': accessToken,
+      'uid': uidToken,
+      'token-type': 'Bearer',
+    });
+  }
+
+  return axios({
+    baseURL: configApi.endpoint,
+    url: url,
     method: method,
-    body: JSON.stringify(body),
+    data: data,
     headers: headers,
-    mode: 'no-cors',
   }).then((response) => {
-    if (!response.ok) {
-      throw response;
-    }
-
     setTokens({
-      accessToken: response.headers.get('access-token'),
-      clientToken: response.headers.get('client'),
-      uidToken: response.headers.get('uid'),
+      accessToken: response.headers['access-token'],
+      clientToken: response.headers.client,
+      uidToken: response.headers.uid,
     });
 
-    return response.json();
+    return response.data;
   });
 };
 

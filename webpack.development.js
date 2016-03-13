@@ -1,21 +1,22 @@
+/*eslint-disable*/
 var path = require('path');
-
-var dist = path.join(__dirname);
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  context: dist,
+  context: __dirname,
   entry: ['./src/index.js', './assets/stylesheets/application.scss'],
   output: {
     path: path.resolve(__dirname, "dist"),
-    publicPath: 'http://0.0.0.0:8080/assets/',
+    publicPath: '/',
     filename: "application.js"
   },
   resolve: {
     root: [
-      path.join(dist, 'src'),
-      path.join(dist, 'assets', 'stylesheets')
+      path.join(__dirname, 'src'),
+      path.join(__dirname, 'assets', 'stylesheets'),
+      path.join(__dirname, 'assets', 'images'),
     ],
-    extensions: ['', '.js', '.scss'],
+    extensions: ['', '.js', '.scss', '.svg'],
   },
   module: {
     loaders: [
@@ -33,5 +34,17 @@ module.exports = {
         loader: 'file?hash=sha512&digest=hex&name=[hash].[ext]'
       }
     ],
-  }
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'index.ejs', // Move the index.html file
+      title: 'Checklist',
+      appMountId: 'app-container',
+      window: {
+        env: {
+          apiHost: 'http://checklist-web-api.herokuapp.com'
+        }
+      }
+    })
+  ]
 };

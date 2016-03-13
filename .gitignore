@@ -18,3 +18,4 @@
 logfile
 
 /node_modules/*
+/public/*

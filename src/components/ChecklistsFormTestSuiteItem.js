@@ -1,5 +1,6 @@
 import React from 'react';
 import Immutable from 'immutable';
+import TextareaAutosize from 'react-textarea-autosize';
 
 class ChecklistsFormTestSuiteItem extends React.Component {
 
@@ -9,9 +10,8 @@ class ChecklistsFormTestSuiteItem extends React.Component {
         <div className="form-title">
           Story #{this.props.index}
         </div>
-        <input
+        <TextareaAutosize
           className="checklists-new-input form-input form-input--md"
-          type="text"
           value={this.props.test.get('title')}
           onChange={this.handleChange.bind(this)}
           placeholder="You can use markdown"

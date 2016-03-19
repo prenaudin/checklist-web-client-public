@@ -31,8 +31,12 @@ export function signout() {
 
 export function validateToken() {
   return (dispatch) => {
-    return api.validateToken().then((resp) => {
-      dispatch({ type: types.SIGNIN, data: resp.data });
-    });
+    return api.validateToken()
+      .then((resp) => {
+        dispatch({ type: types.SIGNIN, data: resp.data });
+      })
+      .catch(() => {
+        history.pushState(null, '/home');
+      });
   };
 }

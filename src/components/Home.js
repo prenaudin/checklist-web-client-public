@@ -106,7 +106,7 @@ class Home extends React.Component {
 
         <section className="home-section home-section--footer">
           <div className="home-section-inner">
-            © 2015 Checklist Limited. All rights reserved. Bordeaux, France
+            © 2016 Checklist Limited. All rights reserved. Bordeaux, France
           </div>
         </section>
       </div>

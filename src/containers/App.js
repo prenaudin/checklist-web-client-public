@@ -1,12 +1,10 @@
-import React, { Component, PropTypes } from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import Immutable from 'immutable'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
-import * as ProjectActions from '../actions/projects'
-import * as AccountActions from '../actions/account'
-import * as ChecklistActions from '../actions/checklists'
+import React, { Component, PropTypes } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import Immutable from 'immutable';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import * as AccountActions from '../actions/account';
 
 class App extends Component {
   componentDidMount() {
@@ -14,6 +12,10 @@ class App extends Component {
   }
 
   render() {
+    if (!this.props.account.get('isSignedIn')) {
+      return false;
+    }
+
     return (
       <div className="app">
         {this.props.header || <Header {...this.props}/>}
@@ -26,13 +28,18 @@ class App extends Component {
 
 App.propTypes = {
   projects: PropTypes.instanceOf(Immutable.Map).isRequired,
+  account: PropTypes.instanceOf(Immutable.Record).isRequired,
   actions: PropTypes.object.isRequired,
+  content: PropTypes.object,
+  header: PropTypes.object,
+  children: PropTypes.object,
 };
 
 function mapStateToProps(state) {
   return {
     projects: state.projects,
     checklists: state.checklists,
+    account: state.account,
   };
 }
 

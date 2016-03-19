@@ -18,6 +18,14 @@
   margin-left: 16px;
 }
 
+.checklists-run-tests-item-title.form-title {
+  margin: -14px 0;
+}
+
+.checklists-poll {
+ flex: 0 0 270px;
+}
+
 .checklists-poll-item {
   display: inline-block;
   padding: 8px 30px;

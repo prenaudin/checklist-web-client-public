@@ -1,6 +1,7 @@
 import React from 'react';
 import ChecklistPoll from './ChecklistPoll';
 import Immutable from 'immutable';
+import Markdown from 'react-remarkable';
 
 class ChecklistsRunTestsItem extends React.Component {
 
@@ -32,8 +33,10 @@ class ChecklistsRunTestsItem extends React.Component {
           onClickItem={this.props.onChangeTestStatus}
         />
         <label className="checklists-run-label">
-          <div className="form-title">
-            {this.props.test.get('title')}
+          <div className="checklists-run-tests-item-title form-title">
+            <Markdown
+              source={this.props.test.get('title')}
+            />
           </div>
           {comment}
         </label>

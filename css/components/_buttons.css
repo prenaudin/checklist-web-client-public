@@ -9,6 +9,10 @@
   border-radius: 2px;
   height: 46px;
   line-height: 24px;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .btn-default {

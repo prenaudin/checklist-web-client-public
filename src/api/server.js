@@ -88,6 +88,12 @@ const ServerAPI = {
     }).then(flattenResponse);
   },
 
+  updateChecklist: ({data}) => {
+    return send('put', `/api/projects/${data.project}/checklists/${data.checklistId}`, {
+      data: decamelizeKeys(data),
+    }).then(flattenResponse);
+  },
+
   findChecklist: ({projectId, checklistId}) => {
     return send('get', `/api/projects/${projectId}/checklists/${checklistId}?include=project`)
       .then(flattenResponse);

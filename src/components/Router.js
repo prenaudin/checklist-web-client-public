@@ -21,6 +21,9 @@ import HeaderChecklistsIndex from './HeaderChecklistsIndex';
 import ChecklistsNew from './ChecklistsNew';
 import HeaderChecklistsNew from './HeaderChecklistsNew';
 
+import ChecklistsEdit from './ChecklistsEdit';
+import HeaderChecklistsEdit from './HeaderChecklistsEdit';
+
 import ChecklistsRun from './ChecklistsRun';
 import HeaderChecklistsRun from './HeaderChecklistsRun';
 
@@ -47,6 +50,10 @@ class AppRouter extends Component {
           <Route
             path="projects/:projectId/checklists/new"
             components={{ content: ChecklistsNew, header: HeaderChecklistsNew }}
+          />
+          <Route
+            path="projects/:projectId/checklists/:checklistId/edit"
+            components={{ content: ChecklistsEdit, header: HeaderChecklistsEdit }}
           />
           <Route
             path="projects/:projectId/checklists/:checklistId/run"

@@ -10,6 +10,14 @@ export function addChecklist(data) {
   };
 }
 
+export function updateChecklist(data) {
+  return (dispatch) => {
+    return api.updateChecklist({data}).then((resp) => {
+      dispatch({ type: types.RECEIVED_ENTITIES, entities: resp.entities });
+    });
+  };
+}
+
 export function findChecklist({projectId, checklistId}) {
   return (dispatch) => {
     return api.findChecklist({projectId, checklistId}).then((resp) => {

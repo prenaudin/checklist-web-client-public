@@ -10,19 +10,22 @@ class ChecklistPoll extends Component {
 
   render() {
     return (
-      <div>
+      <div className="checklists-poll">
         <ChecklistPollItem
           label="👍"
+          status="ok"
           enabled={this.props.status === 'ok'}
           onClick={() => this.props.onClickItem('ok')}
         />
         <ChecklistPollItem
           label="👎"
+          status="nok"
           enabled={this.props.status === 'nok'}
           onClick={() => this.props.onClickItem('nok')}
         />
         <ChecklistPollItem
           label="💤"
+          status="pending"
           enabled={this.props.status === 'pending'}
           onClick={() => this.props.onClickItem('pending')}
         />

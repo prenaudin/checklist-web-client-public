@@ -68,15 +68,18 @@ const ServerAPI = {
   },
 
   createProject: ({data}) => {
-    return send('post', '/api/projects', {data}).then(flattenResponse);
+    return send('post', '/api/projects', {data})
+      .then(flattenResponse);
   },
 
   findAllProjects: () => {
-    return send('get', '/api/projects?include=checklists,user').then(flattenResponse);
+    return send('get', '/api/projects?include=checklists,user')
+      .then(flattenResponse);
   },
 
   findProject: (projectId) => {
-    return send('get', `/api/projects/${projectId}?include=checklists,versions,user`).then(flattenResponse);
+    return send('get', `/api/projects/${projectId}?include=checklists,versions,user`)
+      .then(flattenResponse);
   },
 
   createChecklist: ({data}) => {

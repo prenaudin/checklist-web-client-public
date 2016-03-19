@@ -5,20 +5,20 @@ import {Link} from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as ChecklistActions from '../actions/checklists';
-import ChecklistPoll from './ChecklistPoll';
+import ChecklistsRunTestsItem from './ChecklistsRunTestsItem';
 
 const TestRecord = Immutable.Record({
   id: null,
   title: '',
   comment: '',
   status: 'pending',
+  showComment: false,
 });
 
 const createTest = (params = {}) => {
   const testData = Object.assign({}, { id: _.uniqueId() }, params);
   return new TestRecord(testData);
 };
-
 
 const countOk = (tests) => {
   return tests.filter(test => test.status === 'ok').size;
@@ -33,42 +33,11 @@ const countPending = (tests) => {
 };
 
 const initTests = (testSuite) => {
-  // console.log('initTests', testSuite);
   return _.reduce(testSuite, (memo, test) => {
     const newTest = createTest(test);
     return memo.set(newTest.id, newTest);
   }, new Immutable.Map());
 };
-
-class ChecklistsRunTestsItem extends React.Component {
-
-  render() {
-    return (
-      <div>
-        <ChecklistPoll
-          status={this.props.test.get('status')}
-          onClickItem={this.props.onChangeTestStatus}
-        />
-        <label className="checklists-run-label form-group">
-          <div className="form-title">
-            {this.props.test.title} - {this.props.test.status}
-          </div>
-          <input
-            className="checklists-run-input form-input form-input--md"
-            type="text"
-            value={this.props.test.comment}
-            onChange={this.handleChange.bind(this)}
-            />
-        </label>
-      </div>
-    );
-  }
-
-  handleChange(e) {
-    this.props.onChangeTestComment(e, this.props.test.id);
-  }
-}
-
 
 class ChecklistsRun extends React.Component {
 
@@ -99,7 +68,6 @@ class ChecklistsRun extends React.Component {
 
   render() {
     const {projectId, checklistId} = this.props.params;
-    const project = this.props.projects.get(projectId);
     const checklist = this.props.checklists.get(checklistId);
     let testIndex = 0;
 
@@ -110,9 +78,10 @@ class ChecklistsRun extends React.Component {
     return (
       <div className="checklists-run">
 
-        <label className="checklists-run-label form-group">
-          <div className="form-title">
-            {checklist.get('title')} -
+        <label className="checklists-run-title form-group">
+          <div className="checklists-run-form-title form-title">
+            {checklist.get('title')}
+            {' - '}
             {this.state.title}
           </div>
         </label>
@@ -127,6 +96,7 @@ class ChecklistsRun extends React.Component {
                 test={test}
                 onChangeTestStatus={(status) => this.handleChangeTestStatus({id: test.id, status})}
                 onChangeTestComment={this.handleChangeTestComment.bind(this)}
+                onShowTestComment={this.handleShowTestComment.bind(this)}
               />
             );
           }).toArray()
@@ -163,13 +133,12 @@ class ChecklistsRun extends React.Component {
               <Link className="btn btn-default" to={`/projects/${projectId}/checklists`}>
                 Cancel
               </Link>
-              <a
-                href="javascript:void"
+              <div
                 className="btn btn-primary"
                 onClick={this.handleClickSave.bind(this)}
               >
                 Save
-              </a>
+              </div>
             </div>
           </div>
         </div>
@@ -189,9 +158,17 @@ class ChecklistsRun extends React.Component {
     const newComment = e.target.value;
     const oldTests = this.state.tests;
     this.setState({
-      tests: oldTests.set(id, oldSuite.get(id).set('comment', newComment)),
+      tests: oldTests.set(id, oldTests.get(id).set('comment', newComment)),
     });
   }
+
+  handleShowTestComment(e, id) {
+    const oldTests = this.state.tests;
+    this.setState({
+      tests: oldTests.set(id, oldTests.get(id).set('showComment', true)),
+    });
+  }
+
 
   handleClickSave() {
     const {projectId, checklistId} = this.props.params;
@@ -205,7 +182,9 @@ class ChecklistsRun extends React.Component {
 }
 
 ChecklistsRun.propTypes = {
+  params: React.PropTypes.object.isRequired,
   actions: React.PropTypes.object.isRequired,
+  checklists: React.PropTypes.instanceOf(Immutable.Map),
 };
 
 function mapStateToProps(state) {

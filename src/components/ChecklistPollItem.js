@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 
 const {
   Component,
@@ -8,12 +9,21 @@ const {
 class ChecklistPollItem extends Component {
 
   render() {
+    const className = classNames(
+      'checklists-poll-item',
+      `checklists-poll-item--${this.props.status}`,
+        {
+          'is-enabled': this.props.enabled,
+        }
+    );
+
     return (
-      <span
-        style={{backgroundColor: this.props.enabled ? 'red' : 'white', marginRight: '5px'}}
-        onClick={this.props.onClick}>
+      <div
+        className={className}
+        onClick={this.props.onClick}
+      >
         {this.props.label}
-      </span>
+      </div>
     );
   }
 
@@ -21,8 +31,8 @@ class ChecklistPollItem extends Component {
 
 ChecklistPollItem.propTypes = {
   label: PropTypes.string.isRequired,
+  status: PropTypes.string.isRequired,
   enabled: PropTypes.bool,
-
   onClick: PropTypes.func.isRequired,
 };
 

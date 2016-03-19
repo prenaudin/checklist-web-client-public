@@ -36,8 +36,7 @@ class ChecklistsListItem extends React.Component {
 
   renderDefault() {
     const checklist = this.props.checklist;
-    const lastVersionId = this.props.checklist.get('lastVersion')
-    console.log(this.props);
+    const lastVersionId = this.props.checklist.get('lastVersion');
 
     return (
       <div className='checklists-list-item--default'>

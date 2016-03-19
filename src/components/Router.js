@@ -4,13 +4,13 @@ import {Router, Route, Redirect} from 'react-router';
 import App from '../containers/App';
 
 import Home from './Home';
-import HeaderHome from './HeaderHome';
 
 import ProjectsIndex from './ProjectsIndex';
 
 import AuthSignup from './AuthSignup';
 import AuthSignin from './AuthSignin';
 
+import Profile from './Profile';
 
 import ProjectsNew from './ProjectsNew';
 import HeaderProjectsNew from './HeaderProjectsNew';
@@ -30,10 +30,11 @@ class AppRouter extends Component {
   render() {
     return (
       <Router history={history}>
+        <Route path="home" component={Home}/>
+        <Route path="signup" component={AuthSignup}/>
+        <Route path="signin" component={AuthSignin}/>
         <Route component={App}>
-          <Route path="home" components={{content: Home, header: HeaderHome}}/>
-          <Route path="signup" component={AuthSignup}/>
-          <Route path="signin" component={AuthSignin}/>
+          <Route path="profile" component={Profile}/>
           <Route path="projects" component={ProjectsIndex}/>
           <Route
             path="projects/new"

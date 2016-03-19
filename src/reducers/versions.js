@@ -1,7 +1,7 @@
-import { RECEIVED_ENTITIES } from '../constants/ActionTypes'
-import Immutable from 'immutable'
+import { RECEIVED_ENTITIES } from '../constants/ActionTypes';
+import Immutable from 'immutable';
 
-const initialState  = new Immutable.Map()
+const initialState = new Immutable.Map();
 
 const VersionRecord = Immutable.Record({
   id: null,
@@ -10,22 +10,22 @@ const VersionRecord = Immutable.Record({
   type: 'versions',
   title: '',
   checklist: null,
-  tests: {}
-})
+  tests: {},
+});
 
-const mergeVersions = (state, versions) => {
-  return state.merge(versions.map((version) => {
-    return new VersionRecord(version)
-  }))
-}
+const mergeVersions = (state, newVersions) => {
+  return state.merge(newVersions.map((version) => {
+    return new VersionRecord(version);
+  }));
+};
 
 export default function versions(state = initialState, action) {
   switch (action.type) {
     case RECEIVED_ENTITIES:
-      if (!action.entities.versions) { return state }
-      return mergeVersions(state, Immutable.fromJS(action.entities.versions))
+      if (!action.entities.versions) { return state; }
+      return mergeVersions(state, Immutable.fromJS(action.entities.versions));
 
     default:
-      return state
+      return state;
   }
 }

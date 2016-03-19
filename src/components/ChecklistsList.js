@@ -26,6 +26,7 @@ class ChecklistsList extends React.Component {
                 key={checklist.get('id')}
                 projectId={this.props.projectId}
                 checklist={checklist}
+                versions={this.props.versions}
               />
             )
           }).toArray()

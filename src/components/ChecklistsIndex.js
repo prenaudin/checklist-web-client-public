@@ -16,8 +16,8 @@ class ChecklistsIndex extends React.Component {
       projectId: this.props.params.projectId
     });
 
-    const project = this.props.projects.get(this.props.params.projectId)
-    let projectTitle = project ? project.get('title') : ''
+    const project = this.props.projects.get(this.props.params.projectId);
+    let projectTitle = project ? project.get('title') : '';
 
     return (
       <div className="checklists-index page">
@@ -27,6 +27,7 @@ class ChecklistsIndex extends React.Component {
         <ChecklistsList
           projectId={this.props.params.projectId}
           checklists={checklists}
+          versions={this.props.versions}
         />
       </div>
     );
@@ -36,14 +37,15 @@ class ChecklistsIndex extends React.Component {
 function mapStateToProps(state) {
   return {
     checklists: state.checklists,
-    projects: state.projects
-  }
+    projects: state.projects,
+    versions: state.versions,
+  };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(ProjectActions, dispatch)
-  }
+    actions: bindActionCreators(ProjectActions, dispatch),
+  };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ChecklistsIndex)
+export default connect(mapStateToProps, mapDispatchToProps)(ChecklistsIndex);

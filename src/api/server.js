@@ -76,7 +76,7 @@ const ServerAPI = {
   },
 
   findProject: (projectId) => {
-    return send('get', `/api/projects/${projectId}?include=checklists,user`).then(flattenResponse);
+    return send('get', `/api/projects/${projectId}?include=checklists,versions,user`).then(flattenResponse);
   },
 
   createChecklist: ({data}) => {

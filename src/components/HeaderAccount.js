@@ -1,38 +1,35 @@
 import React from 'react';
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import * as AccountActions from '../actions/account';
+import { connect } from 'react-redux';
+import Immutable from 'immutable';
+import { Link } from 'react-router';
 
 class HeaderAccount extends React.Component {
   render() {
     if (!this.props.account.get('isSignedIn')) {
       return false;
     }
+    const email = this.props.account.get('email');
+    const firstLetter = email[0];
+
     return (
-      <div className="header-infos">
+      <Link to="/profile" className="header-infos">
         {this.props.account.get('email')}
-        <a href='javascript:void(0)' onClick={this.handleClickLogout.bind(this)}>
-          logout
-        </a>
-      </div>
+        <div className="header-infos-avatar">
+          {firstLetter}
+        </div>
+      </Link>
     );
   }
-
-  handleClickLogout() {
-    this.props.actions.signout()
-  }
 }
+
+HeaderAccount.propTypes = {
+  account: React.PropTypes.instanceOf(Immutable.Map).isRequired,
+};
 
 function mapStateToProps(state) {
   return {
-    account: state.account
-  }
+    account: state.account,
+  };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(AccountActions, dispatch)
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderAccount)
+export default connect(mapStateToProps, null)(HeaderAccount);

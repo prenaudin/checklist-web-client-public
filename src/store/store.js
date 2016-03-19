@@ -1,7 +1,5 @@
-import configureStore from './configureStore'
+import configureStore from './configureStore';
 
-const store = configureStore()
+const store = configureStore();
 
-window.store = store
-
-export default store
+export default store;

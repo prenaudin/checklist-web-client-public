@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router'
 import moment from 'moment'
-import ChecklistsHelpers from '../utils/ChecklistsHelpers'
+import ChecklistsHelpers from '../utils/ChecklistsHelpers';
 import Icon from './Icon'
 import * as ChecklistActions from '../actions/checklists'
 import { bindActionCreators } from 'redux'
@@ -35,7 +35,10 @@ class ChecklistsListItem extends React.Component {
   }
 
   renderDefault() {
-    const checklist = this.props.checklist
+    const checklist = this.props.checklist;
+    const lastVersionId = this.props.checklist.get('lastVersion')
+    console.log(this.props);
+
     return (
       <div className='checklists-list-item--default'>
         <a
@@ -61,7 +64,7 @@ class ChecklistsListItem extends React.Component {
           <div className='checklists-list-item-counters-list clearfix'>
             <div className='checklists-list-item-counters-item'>
               <div className='checklists-list-item-counters-item-count'>
-                {ChecklistsHelpers.getTestsOKCount(checklist)}
+                {checklist.get('lastVersionOkCount')}
               </div>
               <div className='checklists-list-item-counters-item-label'>
                 👍
@@ -69,7 +72,7 @@ class ChecklistsListItem extends React.Component {
             </div>
             <div className='checklists-list-item-counters-item'>
               <div className='checklists-list-item-counters-item-count'>
-                {ChecklistsHelpers.getTestsNOKCount(checklist)}
+                {checklist.get('lastVersionNokCount')}
               </div>
               <div className='checklists-list-item-counters-item-label'>
                 👎
@@ -77,7 +80,7 @@ class ChecklistsListItem extends React.Component {
             </div>
             <div className='checklists-list-item-counters-item'>
               <div className='checklists-list-item-counters-item-count'>
-                {ChecklistsHelpers.getTestsPendingCount(checklist)}
+                {checklist.get('lastVersionPendingCount')}
               </div>
               <div className='checklists-list-item-counters-item-label'>
                 💤
@@ -139,15 +142,15 @@ class ChecklistsListItem extends React.Component {
   handleClickDelete() {
     this.props.actions.deleteChecklist({
       projectId: this.props.checklist.get('project'),
-      checklistId: this.props.checklist.get('id')
-    })
+      checklistId: this.props.checklist.get('id'),
+    });
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(ChecklistActions, dispatch)
-  }
+    actions: bindActionCreators(ChecklistActions, dispatch),
+  };
 }
 
 export default connect(null, mapDispatchToProps)(ChecklistsListItem)

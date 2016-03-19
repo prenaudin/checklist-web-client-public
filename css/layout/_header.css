@@ -16,6 +16,28 @@
   float: right;
 }
 
+a.header-infos {
+  text-decoration: none;
+  color: rgba(0, 0, 0, .4);
+
+  &:hover {
+    color: rgba(0, 0, 0, .8);
+  }
+}
+
+.header-infos-avatar {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  background: $purple;
+  display: inline-block;
+  margin-left: 10px;
+  color: $white;
+  border-radius: 50%;
+  text-align: center;
+  text-transform: uppercase;
+}
+
 .header-breadcrumbs-item {
   position: relative;
   display: inline-block;

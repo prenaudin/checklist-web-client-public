@@ -1,4 +1,5 @@
 /*eslint-disable*/
+var webpack = require('webpack');
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -55,6 +56,9 @@ module.exports = {
     ];
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+    }),
     new HtmlWebpackPlugin({
       template: 'index.ejs', // Move the index.html file
       title: 'Checklist',

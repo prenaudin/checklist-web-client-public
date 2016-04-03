@@ -7,7 +7,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var extractApplicationStyle = new ExtractTextPlugin('application-[contenthash].css');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
-var mainConfig = require('./webpack.development.js');
+var mainConfig = require('./webpack.main.js');
 
 mainConfig.output = {
   path: path.join(__dirname, 'public'),
@@ -41,11 +41,6 @@ mainConfig.plugins = [
       minifyURLs: true
     },
     appMountId: 'app-container',
-    window: {
-      env: {
-        apiHost: 'http://checklist-web-api.herokuapp.com'
-      }
-    }
   }),
   new webpack.DefinePlugin({
     "process.env": {

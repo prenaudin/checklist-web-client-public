@@ -8,6 +8,7 @@ plugins:
 
 env:
   browser: true
+  mocha: true
   node: false
 
 rules:
@@ -16,3 +17,6 @@ rules:
   jsx-quotes: 1
   id-length: [2, {"exceptions": ["e", "i", "_", "S"]}]
   new-cap: 0
+
+globals:
+  expect: true

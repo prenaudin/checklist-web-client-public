@@ -1,5 +1,4 @@
-import local from './local'
-import server from './server'
+import server from 'api/server';
 
-const api = server
-export default api
+const api = server;
+export default api;

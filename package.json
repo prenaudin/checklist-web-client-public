@@ -8,9 +8,10 @@
     "build": "$(npm bin)/webpack --config ./webpack.production.js --progress --cheap-eval-source-map",
     "serve-dev": "NODE_ENV=development $(npm bin)/webpack-dev-server --config ./webpack.development.js --hot --progress --inline --history-api-fallback --cheap-eval-source-map",
     "serve-prod": "NODE_ENV=production node server.prod.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "npm run eslint",
-    "eslint": "eslint --ext .js,.jsx ."
+    "eslint": "eslint --ext .js,.jsx .",
+    "test": "NODE_ENV=test $(npm bin)/karma start --single-run --no-auto-watch ./karma.config.js",
+    "test-watch": "NODE_ENV=test $(npm bin)/karma start ./karma.config.js"
   },
   "engines": {
     "node": "5.3.0"
@@ -42,6 +43,7 @@
     "immutable": "^3.7.6",
     "imports-loader": "^0.6.5",
     "lodash": "3.10.1",
+    "mocha-loader": "^0.7.1",
     "moment": "^2.11.2",
     "postcss-focus": "^1.0.0",
     "postcss-import": "^7.0.0",
@@ -64,5 +66,20 @@
     "webpack": "^1.12.9",
     "webpack-dev-server": "^1.14.0",
     "webpack-manifest-plugin": "^1.0.0"
+  },
+  "devDependencies": {
+    "babel-register": "^6.7.2",
+    "chai": "^3.5.0",
+    "karma": "^0.13.22",
+    "karma-babel-preprocessor": "^6.0.1",
+    "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "^0.2.3",
+    "karma-mocha": "^0.2.2",
+    "karma-mocha-reporter": "^2.0.0",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-webpack": "^1.7.0",
+    "mocha": "^2.4.5",
+    "redux-mock-store": "^1.0.2",
+    "sinon": "^1.17.3"
   }
 }

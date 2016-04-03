@@ -124,7 +124,7 @@ class ChecklistsForm extends React.Component {
     const data = {
       title: this.state.title,
       testSuite: serializeTestSuite(this.state.testSuite).map((test) => {
-        return {title: test.get('title')};
+        return test.get('title');
       }).toArray(),
       project: projectId,
     };

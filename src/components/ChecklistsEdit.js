@@ -21,7 +21,11 @@ class ChecklistsEdit extends React.Component {
     }
 
     const testSuite = checklist.get('testSuite')
-      .map((test) => test.set('id', _.uniqueId('testSuiteRecordId')))
+      .map((testTitle) => {
+        return Immutable.Map()
+          .set('id', _.uniqueId('testSuiteRecordId'))
+          .set('title', testTitle);
+      })
       .toMap()
       .mapKeys((key, test) => {
         return test.get('id');

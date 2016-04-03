@@ -1,17 +1,9 @@
 import { compose, createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import Immutable from 'immutable';
 import rootReducer from '../reducers';
 
-const initialState = {
-  projects: new Immutable.Map(),
-  checklists: new Immutable.Map(),
-  account: new Immutable.Map(),
-  versions: new Immutable.Map(),
-};
-
 export default function configureStore() {
-  const store = createStore(rootReducer, initialState, compose(
+  const store = createStore(rootReducer, undefined, compose(
     applyMiddleware(thunk),
     window.devToolsExtension ? window.devToolsExtension() : defaultFunction => defaultFunction
   ));

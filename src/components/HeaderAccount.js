@@ -23,7 +23,7 @@ class HeaderAccount extends React.Component {
 }
 
 HeaderAccount.propTypes = {
-  account: React.PropTypes.instanceOf(Immutable.Map).isRequired,
+  account: React.PropTypes.instanceOf(Immutable.Record).isRequired,
 };
 
 function mapStateToProps(state) {

@@ -33,8 +33,8 @@ const countPending = (tests) => {
 };
 
 const initTests = (testSuite) => {
-  return _.reduce(testSuite, (memo, test) => {
-    const newTest = createTest(test);
+  return _.reduce(testSuite, (memo, testTitle) => {
+    const newTest = createTest({title: testTitle});
     return memo.set(newTest.id, newTest);
   }, new Immutable.Map());
 };

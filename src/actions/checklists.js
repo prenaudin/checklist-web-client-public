@@ -18,6 +18,14 @@ export function updateChecklist(data) {
   };
 }
 
+export function findChecklists({projectId}) {
+  return (dispatch) => {
+    return api.findChecklists({projectId}).then((resp) => {
+      dispatch({ type: types.RECEIVED_ENTITIES, entities: resp.entities });
+    });
+  };
+}
+
 export function findChecklist({projectId, checklistId}) {
   return (dispatch) => {
     return api.findChecklist({projectId, checklistId}).then((resp) => {

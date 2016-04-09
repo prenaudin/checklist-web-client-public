@@ -137,6 +137,7 @@ li.checklists-list-item--show {
   color: $black;
   text-decoration: none;
   text-transform: uppercase;
+  cursor: pointer;
   > span {
     vertical-align: top;
     opacity: 0;
@@ -155,26 +156,29 @@ li.checklists-list-item--show {
   right: 8px;
 }
 
-.checklists-list-item-actions {
-  > a {
-    display: block;
-    text-decoration: none;
-    padding: 20px 10px;
-    border-bottom: 1px solid #d8d8d8;
-    font-size: 20px;
-    color: $black;
-    &:hover {
-      color: $purple;
-    }
-    > .icon {
-      margin-right: 10px;
-      vertical-align: -3px;
-    }
+.checklists-list-item-actions-item {
+  display: block;
+  text-decoration: none;
+  padding: 20px 10px;
+  border-bottom: 1px solid #d8d8d8;
+  font-size: 20px;
+  color: $black;
+
+  &:hover {
+    cursor: pointer;
+    color: $purple;
   }
-  > a:first-child {
+
+  > .icon {
+    margin-right: 10px;
+    vertical-align: -3px;
+  }
+
+  &:first-child {
     margin-top: -15px;
   }
-  > a:last-child {
+
+  &:last-child {
     border-bottom: none;
     opacity: 0.4;
   }

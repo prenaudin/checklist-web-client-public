@@ -1,17 +1,17 @@
 import React from 'react'
 import ChecklistsList from './ChecklistsList'
-import ChecklistsHelpers from '../utils/ChecklistsHelpers'
-import * as ProjectActions from '../actions/projects'
+import {getChecklistsByProject} from '../utils/ChecklistsHelpers'
+import * as ChecklistActions from '../actions/checklists'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 class ChecklistsIndex extends React.Component {
   componentDidMount() {
-    this.props.actions.findProject({projectId: this.props.params.projectId})
+    this.props.actions.findChecklists({projectId: this.props.params.projectId})
   }
 
   render() {
-    const checklists = ChecklistsHelpers.getChecklistsByProject({
+    const checklists = getChecklistsByProject({
       checklists: this.props.checklists,
       projectId: this.props.params.projectId
     });
@@ -44,7 +44,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(ProjectActions, dispatch),
+    actions: bindActionCreators(ChecklistActions, dispatch),
   };
 }
 

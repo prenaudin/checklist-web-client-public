@@ -1,21 +1,13 @@
 import { RECEIVED_ENTITIES } from '../constants/ActionTypes';
 import Immutable from 'immutable';
+import Version from 'models/Version';
+import VersionMap from 'models/VersionMap';
 
-const initialState = new Immutable.Map();
-
-const VersionRecord = Immutable.Record({
-  id: null,
-  createdAt: null,
-  updatedAt: null,
-  type: 'versions',
-  title: '',
-  checklist: null,
-  tests: {},
-});
+const initialState = new VersionMap();
 
 const mergeVersions = (state, newVersions) => {
   return state.merge(newVersions.map((version) => {
-    return new VersionRecord(version);
+    return new Version(version);
   }));
 };
 

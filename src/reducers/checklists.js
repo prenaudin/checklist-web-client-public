@@ -12,10 +12,7 @@ const ChecklistRecord = Immutable.Record({
   project: null,
   testSuite: {},
   versions: new Immutable.OrderedSet(),
-  lastVersionOkCount: 0,
-  lastVersionNokCount: 0,
-  lastVersionPendingCount: 0,
-  lastVersionTitle: 'v0',
+  lastVersion: null,
 });
 
 const mergeChecklists = (state, newChecklists) => {

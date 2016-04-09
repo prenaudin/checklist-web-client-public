@@ -94,8 +94,13 @@ const ServerAPI = {
     }).then(flattenResponse);
   },
 
+  findChecklists: ({projectId}) => {
+    return send('get', `/api/projects/${projectId}/checklists?include=project,last_version`)
+      .then(flattenResponse);
+  },
+
   findChecklist: ({projectId, checklistId}) => {
-    return send('get', `/api/projects/${projectId}/checklists/${checklistId}?include=project`)
+    return send('get', `/api/projects/${projectId}/checklists/${checklistId}?include=project,last_version`)
       .then(flattenResponse);
   },
 

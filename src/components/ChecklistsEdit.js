@@ -44,7 +44,6 @@ class ChecklistsEdit extends React.Component {
   handleClickSave(data) {
     const {checklistId, projectId} = this.props.params;
     const updateData = _.extend({}, data, {checklistId});
-    console.log(updateData);
     this.props.actions.updateChecklist(updateData);
     this.props.history.pushState(null, `/projects/${projectId}/checklists`);
   }

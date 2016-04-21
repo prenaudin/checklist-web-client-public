@@ -5,18 +5,15 @@ import App from '../containers/App';
 
 import Home from './Home';
 
-import ProjectsIndex from './ProjectsIndex';
+import ProjectsIndexContainer from 'containers/ProjectsIndexContainer';
 
-import AuthSignup from './AuthSignup';
-import AuthSignin from './AuthSignin';
+import AuthSignup from './Auth/Signup';
+import AuthSignin from './Auth/Signin';
 
 import Profile from './Profile';
 
-import ProjectsNew from './ProjectsNew';
-import HeaderProjectsNew from './HeaderProjectsNew';
-
-import ChecklistsIndex from './ChecklistsIndex';
-import HeaderChecklistsIndex from './HeaderChecklistsIndex';
+import ProjectsNewContainer from 'containers/ProjectsNewContainer';
+import ChecklistsIndexContainer from 'containers/ChecklistsIndexContainer';
 
 import ChecklistsNew from './ChecklistsNew';
 import HeaderChecklistsNew from './HeaderChecklistsNew';
@@ -27,8 +24,6 @@ import HeaderChecklistsEdit from './HeaderChecklistsEdit';
 import ChecklistsRun from './ChecklistsRun';
 import HeaderChecklistsRun from './HeaderChecklistsRun';
 
-import ProjectsEdit from './ProjectsEdit';
-
 class AppRouter extends Component {
   render() {
     return (
@@ -38,14 +33,14 @@ class AppRouter extends Component {
         <Route path="signin" component={AuthSignin}/>
         <Route component={App}>
           <Route path="profile" component={Profile}/>
-          <Route path="projects" component={ProjectsIndex}/>
+          <Route path="projects" component={ProjectsIndexContainer}/>
           <Route
             path="projects/new"
-            components={{ content: ProjectsNew, header: HeaderProjectsNew }}
+            component={ProjectsNewContainer}
           />
           <Route
             path="projects/:projectId/checklists"
-            components={{ content: ChecklistsIndex, header: HeaderChecklistsIndex }}
+            components={ChecklistsIndexContainer}
           />
           <Route
             path="projects/:projectId/checklists/new"
@@ -59,7 +54,6 @@ class AppRouter extends Component {
             path="projects/:projectId/checklists/:checklistId/run"
             components={{ content: ChecklistsRun, header: HeaderChecklistsRun }}
           />
-          <Route path="projects/:projectId/edit" component={ProjectsEdit}/>
           <Redirect from="/" to="/home"/>
         </Route>
       </Router>

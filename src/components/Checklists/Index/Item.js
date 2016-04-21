@@ -1,13 +1,10 @@
 import React from 'react';
-import {Link} from 'react-router';
+import { Link } from 'react-router';
 import moment from 'moment';
-import Icon from './Icon';
-import * as ChecklistActions from '../actions/checklists';
-import VersionMap from 'models/VersionMap';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import Icon from 'components/Icon';
+import Version from 'models/Version';
 
-class ChecklistsListItem extends React.Component {
+class ChecklistsIndexItem extends React.Component {
 
   constructor() {
     super();
@@ -33,9 +30,7 @@ class ChecklistsListItem extends React.Component {
   }
 
   renderDefault() {
-    const checklist = this.props.checklist;
-    const lastVersionId = this.props.checklist.get('lastVersion');
-    const lastVersion = this.props.versions.get(lastVersionId);
+    const { lastVersion, checklist } = this.props;
 
     let lastVersionContent = <span>No version yet</span>;
     if (lastVersion) {
@@ -157,23 +152,16 @@ class ChecklistsListItem extends React.Component {
   }
 
   handleClickDelete() {
-    this.props.actions.deleteChecklist({
-      projectId: this.props.checklist.get('project'),
+    this.props.onDeleteChecklist({
       checklistId: this.props.checklist.get('id'),
     });
   }
 }
 
-ChecklistsListItem.propTypes = {
+ChecklistsIndexItem.propTypes = {
   checklist: React.PropTypes.any.isRequired,
-  actions: React.PropTypes.object.isRequired,
-  versions: React.PropTypes.instanceOf(VersionMap).isRequired,
+  lastVersion: React.PropTypes.instanceOf(Version),
+  onDeleteChecklist: React.PropTypes.func.isRequired,
 };
 
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(ChecklistActions, dispatch),
-  };
-}
-
-export default connect(null, mapDispatchToProps)(ChecklistsListItem);
+export default ChecklistsIndexItem;

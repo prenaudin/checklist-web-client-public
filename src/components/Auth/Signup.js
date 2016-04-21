@@ -1,14 +1,14 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as AccountActions from '../actions/account';
-import AuthPage from './AuthPage';
+import * as AccountActions from 'actions/account';
+import AuthPage from 'components/Auth/Page';
 
-class AuthSignin extends React.Component {
+class AuthSignup extends React.Component {
   render() {
     return (
       <AuthPage>
-        <div className="auth auth-signin form-group">
+        <div className="auth auth-signup form-group">
           <input
             type="text"
             className="form-input form-input--md"
@@ -23,11 +23,18 @@ class AuthSignin extends React.Component {
             ref="password"
             placeholder="Password"
           />
+          <input
+            type="password"
+            className="form-input form-input--md"
+            defaultValue=""
+            ref="passwordConfirmation"
+            placeholder="Password confirmation"
+          />
           <button
             className="auth-btn btn btn-primary"
             onClick={this.handleClickSignin.bind(this)}
           >
-            Sign in
+            Sign up for free
           </button>
         </div>
       </AuthPage>
@@ -37,11 +44,12 @@ class AuthSignin extends React.Component {
   handleClickSignin() {
     const email = this.refs.email.value;
     const password = this.refs.password.value;
-    this.props.actions.signin({email, password});
+    const passwordConfirmation = this.refs.passwordConfirmation.value;
+    this.props.actions.signup({email, password, passwordConfirmation});
   }
 }
 
-AuthSignin.propTypes = {
+AuthSignup.propTypes = {
   actions: React.PropTypes.object.isRequired,
 };
 
@@ -54,4 +62,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   null,
   mapDispatchToProps
-)(AuthSignin);
+)(AuthSignup);

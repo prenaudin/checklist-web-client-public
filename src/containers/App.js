@@ -2,8 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Immutable from 'immutable';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
 import * as AccountActions from '../actions/account';
 
 class App extends Component {
@@ -18,9 +16,8 @@ class App extends Component {
 
     return (
       <div className="app">
-        {this.props.header || <Header {...this.props}/>}
+        {this.props.header || false}
         {this.props.content || this.props.children}
-        <Footer/>
       </div>
     );
   }

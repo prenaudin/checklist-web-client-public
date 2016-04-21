@@ -1,6 +1,6 @@
-import * as types from '../constants/ActionTypes';
-import api from '../api/api';
-import history from '../config/history';
+import * as types from 'constants/ActionTypes';
+import api from 'api/api';
+import history from 'config/history';
 
 export function signin(data) {
   return (dispatch) => {

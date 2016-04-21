@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ProfilePage from 'components/Profile/Page';
-import { signout } from 'actions/account';
+import { signout } from 'actions/auth';
 
 class ProfileContainer extends Component {
   render() {

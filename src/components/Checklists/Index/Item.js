@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import moment from 'moment';
-import Icon from 'components/Icon';
+import Icon from 'components/Utils/Icon';
 import Version from 'models/Version';
 
 class ChecklistsIndexItem extends React.Component {

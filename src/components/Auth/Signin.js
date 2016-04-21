@@ -1,7 +1,7 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as AccountActions from 'actions/account';
+import * as AuthActions from 'actions/auth';
 import AuthPage from 'components/Auth/Page';
 
 class AuthSignin extends React.Component {
@@ -47,7 +47,7 @@ AuthSignin.propTypes = {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(AccountActions, dispatch),
+    actions: bindActionCreators(AuthActions, dispatch),
   };
 }
 

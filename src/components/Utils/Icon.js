@@ -2,9 +2,8 @@ import React from 'react';
 const iconsImgSrc = require('icons.svg');
 
 class Icon extends React.Component {
-
   render() {
-    const iconId = this.props.id ? 'icon-' + this.props.id : this.props.iconId;
+    const iconId = 'icon-' + this.props.id;
     const href = iconsImgSrc + '#' + iconId;
     return (
       <svg
@@ -13,7 +12,10 @@ class Icon extends React.Component {
       />
     );
   }
-
 }
+
+Icon.propTypes = {
+  id: React.PropTypes.string.isRequired,
+};
 
 export default Icon;

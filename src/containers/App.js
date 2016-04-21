@@ -2,7 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Immutable from 'immutable';
-import * as AccountActions from '../actions/account';
+import User from 'models/User';
+import * as AuthActions from '../actions/auth';
 
 class App extends Component {
   componentDidMount() {
@@ -10,7 +11,7 @@ class App extends Component {
   }
 
   render() {
-    if (!this.props.account.get('isSignedIn')) {
+    if (!this.props.user.get('isSignedIn')) {
       return false;
     }
 
@@ -25,7 +26,7 @@ class App extends Component {
 
 App.propTypes = {
   projects: PropTypes.instanceOf(Immutable.Map).isRequired,
-  account: PropTypes.instanceOf(Immutable.Record).isRequired,
+  user: PropTypes.instanceOf(User).isRequired,
   actions: PropTypes.object.isRequired,
   content: PropTypes.object,
   header: PropTypes.object,
@@ -36,13 +37,13 @@ function mapStateToProps(state) {
   return {
     projects: state.projects,
     checklists: state.checklists,
-    account: state.account,
+    user: state.user,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(AccountActions, dispatch),
+    actions: bindActionCreators(AuthActions, dispatch),
   };
 }
 

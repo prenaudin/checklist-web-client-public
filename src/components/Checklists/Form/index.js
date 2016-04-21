@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import Immutable from 'immutable';
 import {Link} from 'react-router';
-import ChecklistsFormTestSuiteItem from './ChecklistsFormTestSuiteItem';
+import ChecklistsFormTestSuiteItem from 'components/Checklists/Form/TestSuiteItem';
 
 const TestRecord = Immutable.Record({
   id: null,
@@ -32,7 +32,7 @@ class ChecklistsForm extends React.Component {
   }
 
   render() {
-    const projectId = this.props.params.projectId;
+    const projectId = this.props.projectId;
     let testIndex = 0;
 
     return (
@@ -120,7 +120,7 @@ class ChecklistsForm extends React.Component {
   }
 
   handleClickSave() {
-    const projectId = this.props.params.projectId;
+    const { projectId } = this.props;
     const data = {
       title: this.state.title,
       testSuite: serializeTestSuite(this.state.testSuite).map((test) => {
@@ -134,7 +134,7 @@ class ChecklistsForm extends React.Component {
 
 ChecklistsForm.propTypes = {
   title: React.PropTypes.string,
-  params: React.PropTypes.object.isRequired,
+  projectId: React.PropTypes.string.isRequired,
   testSuite: React.PropTypes.instanceOf(Immutable.Map),
   onClickSave: React.PropTypes.func.isRequired,
 };

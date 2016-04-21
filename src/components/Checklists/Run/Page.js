@@ -1,11 +1,15 @@
 import React from 'react';
 import _ from 'lodash';
 import Immutable from 'immutable';
-import {Link} from 'react-router';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import * as ChecklistActions from '../actions/checklists';
-import ChecklistsRunTestsItem from './ChecklistsRunTestsItem';
+import { Link } from 'react-router';
+
+import Project from 'models/Project';
+import Checklist from 'models/Checklist';
+
+import AppPage from 'components/App/Page';
+import AppHeaderTitleLink from 'components/App/HeaderTitleLink';
+import AppHeaderTitleItem from 'components/App/HeaderTitleItem';
+import ChecklistsRunTestsItem from './TestsItem';
 
 const TestRecord = Immutable.Record({
   id: null,
@@ -39,44 +43,35 @@ const initTests = (testSuite) => {
   }, new Immutable.Map());
 };
 
-class ChecklistsRun extends React.Component {
+class ChecklistsRunPage extends React.Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
+    const { checklist } = props;
     this.state = {
-      title: '',
-      tests: new Immutable.Map(),
+      title: 'v' + (checklist.get('versions').size + 1),
+      tests: initTests(checklist.get('testSuite').toJS()),
     };
   }
 
-  componentDidMount() {
-    const {checklistId, projectId} = this.props.params;
-    this.props.actions.findChecklist({checklistId, projectId});
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const {checklistId} = nextProps.params;
-    const checklist = nextProps.checklists.get(checklistId);
-    if (checklist && this.state.tests.size === 0) {
-      this.setState({
-        title: 'v' + (checklist.get('versions').size + 1),
-        tests: initTests(checklist.get('testSuite').toJS()),
-      });
-    }
-  }
-
   render() {
-    const {projectId, checklistId} = this.props.params;
-    const checklist = this.props.checklists.get(checklistId);
+    const {project, checklist} = this.props;
     let testIndex = 0;
 
-    if (!checklist) {
-      return false;
-    }
-
     return (
-      <div className="checklists-run">
+      <AppPage
+        id="checklists-run"
+        title={[
+          <AppHeaderTitleLink key="projects" to="/projects"> Projects </AppHeaderTitleLink>,
+          <AppHeaderTitleLink key="checklist" to={`/projects/${project.get('id')}/checklists`}>
+            { project.get('title') }
+          </AppHeaderTitleLink>,
+          <AppHeaderTitleItem key="new">
+            Run { checklist.get('title') }
+          </AppHeaderTitleItem>,
+        ]}
+      >
 
         <label className="checklists-run-title form-group">
           <div className="checklists-run-form-title form-title">
@@ -130,7 +125,7 @@ class ChecklistsRun extends React.Component {
             </div>
 
             <div className="checklists-run-actions form-actions">
-              <Link className="btn btn-default" to={`/projects/${projectId}/checklists`}>
+              <Link className="btn btn-default" to={`/projects/${project.get('id')}/checklists`}>
                 Cancel
               </Link>
               <div
@@ -142,7 +137,7 @@ class ChecklistsRun extends React.Component {
             </div>
           </div>
         </div>
-      </div>
+      </AppPage>
     );
   }
 
@@ -169,38 +164,19 @@ class ChecklistsRun extends React.Component {
     });
   }
 
-
   handleClickSave() {
-    const {projectId, checklistId} = this.props.params;
     const data = {
       title: this.state.title,
       tests: this.state.tests.toList().toJS(),
     };
-    this.props.actions.createVersion({projectId, checklistId, data});
+    this.props.onCreateVersion(data);
   }
-
 }
 
-ChecklistsRun.propTypes = {
-  params: React.PropTypes.object.isRequired,
-  actions: React.PropTypes.object.isRequired,
-  checklists: React.PropTypes.instanceOf(Immutable.Map),
+ChecklistsRunPage.propTypes = {
+  project: React.PropTypes.instanceOf(Project).isRequired,
+  checklist: React.PropTypes.instanceOf(Checklist).isRequired,
+  onCreateVersion: React.PropTypes.func.isRequired,
 };
 
-function mapStateToProps(state) {
-  return {
-    checklists: state.checklists,
-    projects: state.projects,
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(ChecklistActions, dispatch),
-  };
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ChecklistsRun);
+export default ChecklistsRunPage;

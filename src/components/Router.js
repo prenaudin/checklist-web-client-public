@@ -14,9 +14,7 @@ import ProfileContainer from 'containers/ProfileContainer';
 import ChecklistsIndexContainer from 'containers/ChecklistsIndexContainer';
 import ChecklistsNewContainer from 'containers/ChecklistsNewContainer';
 import ChecklistsEditContainer from 'containers/ChecklistsEditContainer';
-
-import ChecklistsRun from './ChecklistsRun';
-import HeaderChecklistsRun from './HeaderChecklistsRun';
+import ChecklistsRunContainer from 'containers/ChecklistsRunContainer';
 
 class AppRouter extends Component {
   render() {
@@ -38,15 +36,15 @@ class AppRouter extends Component {
           />
           <Route
             path="projects/:projectId/checklists/new"
-            components={ChecklistsNewContainer}
+            component={ChecklistsNewContainer}
           />
           <Route
             path="projects/:projectId/checklists/:checklistId/edit"
-            components={ChecklistsEditContainer}
+            component={ChecklistsEditContainer}
           />
           <Route
             path="projects/:projectId/checklists/:checklistId/run"
-            components={{ content: ChecklistsRun, header: HeaderChecklistsRun }}
+            component={ChecklistsRunContainer}
           />
           <Redirect from="/" to="/home"/>
         </Route>

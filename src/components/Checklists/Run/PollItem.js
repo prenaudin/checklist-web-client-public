@@ -6,7 +6,7 @@ const {
   PropTypes,
 } = React;
 
-class ChecklistPollItem extends Component {
+class ChecklistsRunPollItem extends Component {
 
   render() {
     const className = classNames(
@@ -29,15 +29,15 @@ class ChecklistPollItem extends Component {
 
 }
 
-ChecklistPollItem.propTypes = {
+ChecklistsRunPollItem.propTypes = {
   label: PropTypes.string.isRequired,
   status: PropTypes.string.isRequired,
   enabled: PropTypes.bool,
   onClick: PropTypes.func.isRequired,
 };
 
-ChecklistPollItem.defaultProps = {
+ChecklistsRunPollItem.defaultProps = {
   enabled: false,
 };
 
-export default ChecklistPollItem;
+export default ChecklistsRunPollItem;

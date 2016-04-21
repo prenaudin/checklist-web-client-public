@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import history from '../config/history';
 import {Router, Route, Redirect} from 'react-router';
-import App from '../containers/App';
 
 import Home from './Home';
-
-import ProjectsIndexContainer from 'containers/ProjectsIndexContainer';
 
 import AuthSignup from './Auth/Signup';
 import AuthSignin from './Auth/Signin';
 
-import Profile from './Profile';
-
+import App from 'containers/App';
+import ProjectsIndexContainer from 'containers/ProjectsIndexContainer';
 import ProjectsNewContainer from 'containers/ProjectsNewContainer';
+import ProfileContainer from 'containers/ProfileContainer';
 import ChecklistsIndexContainer from 'containers/ChecklistsIndexContainer';
 
 import ChecklistsNew from './ChecklistsNew';
@@ -32,7 +30,7 @@ class AppRouter extends Component {
         <Route path="signup" component={AuthSignup}/>
         <Route path="signin" component={AuthSignin}/>
         <Route component={App}>
-          <Route path="profile" component={Profile}/>
+          <Route path="profile" component={ProfileContainer}/>
           <Route path="projects" component={ProjectsIndexContainer}/>
           <Route
             path="projects/new"

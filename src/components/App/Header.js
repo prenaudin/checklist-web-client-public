@@ -1,6 +1,6 @@
 import React from 'react';
 import AppHeaderTitleLink from 'components/App/HeaderTitleLink';
-import HeaderAccount from 'components/HeaderAccount';
+import HeaderUserContainer from 'containers/HeaderUserContainer';
 
 class AppHeader extends React.Component {
   render() {
@@ -18,7 +18,7 @@ class AppHeader extends React.Component {
         <div className="header-title header-title--breadcrumbs">
           { title }
         </div>
-        <HeaderAccount/>
+        <HeaderUserContainer/>
       </div>
     );
   }

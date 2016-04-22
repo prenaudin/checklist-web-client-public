@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Immutable from 'immutable';
 import User from 'models/User';
-import * as AuthActions from '../actions/auth';
+import * as AuthActions from 'actions/auth';
 
 class App extends Component {
   componentDidMount() {
@@ -17,8 +17,7 @@ class App extends Component {
 
     return (
       <div className="app">
-        {this.props.header || false}
-        {this.props.content || this.props.children}
+        { this.props.children }
       </div>
     );
   }
@@ -28,8 +27,6 @@ App.propTypes = {
   projects: PropTypes.instanceOf(Immutable.Map).isRequired,
   user: PropTypes.instanceOf(User).isRequired,
   actions: PropTypes.object.isRequired,
-  content: PropTypes.object,
-  header: PropTypes.object,
   children: PropTypes.object,
 };
 

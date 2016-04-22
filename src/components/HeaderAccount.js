@@ -1,19 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Immutable from 'immutable';
 import { Link } from 'react-router';
+import User from 'models/User';
 
 class HeaderAccount extends React.Component {
   render() {
-    if (!this.props.account.get('isSignedIn')) {
+    if (!this.props.user.get('isSignedIn')) {
       return false;
     }
-    const email = this.props.account.get('email');
+    const email = this.props.user.get('email');
     const firstLetter = email[0];
 
     return (
       <Link to="/profile" className="header-infos">
-        {this.props.account.get('email')}
+        {this.props.user.get('email')}
         <div className="header-infos-avatar">
           {firstLetter}
         </div>
@@ -23,12 +23,12 @@ class HeaderAccount extends React.Component {
 }
 
 HeaderAccount.propTypes = {
-  account: React.PropTypes.instanceOf(Immutable.Record).isRequired,
+  user: React.PropTypes.instanceOf(User).isRequired,
 };
 
 function mapStateToProps(state) {
   return {
-    account: state.account,
+    user: state.user,
   };
 }
 

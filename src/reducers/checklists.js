@@ -1,23 +1,13 @@
 import { RECEIVED_ENTITIES, DELETE_CHECKLIST_SUCCESS } from '../constants/ActionTypes';
 import Immutable from 'immutable';
+import Checklist from 'models/Checklist';
+import ChecklistMap from 'models/ChecklistMap';
 
-const initialState = new Immutable.Map();
-
-const ChecklistRecord = Immutable.Record({
-  id: null,
-  createdAt: null,
-  updatedAt: null,
-  type: 'checklists',
-  title: '',
-  project: null,
-  testSuite: {},
-  versions: new Immutable.OrderedSet(),
-  lastVersion: null,
-});
+const initialState = new ChecklistMap();
 
 const mergeChecklists = (state, newChecklists) => {
   return state.merge(newChecklists.map((checklist) => {
-    return new ChecklistRecord(checklist);
+    return new Checklist(checklist);
   }));
 };
 

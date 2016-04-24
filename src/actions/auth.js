@@ -4,19 +4,29 @@ import history from 'config/history';
 
 export function signin(data) {
   return (dispatch) => {
-    return api.signin({data}).then((resp) => {
-      dispatch({ type: types.SIGNIN, data: resp.data });
-      history.pushState(null, '/projects');
-    });
+    dispatch({ type: types.AUTH_START, data: data });
+    return api.signin({data})
+      .then((resp) => {
+        dispatch({ type: types.SIGNIN, data: resp.data });
+        history.pushState(null, '/projects');
+      })
+      .catch((error) => {
+        dispatch({ type: types.AUTH_ERROR, data: error });
+      });
   };
 }
 
 export function signup(data) {
   return (dispatch) => {
-    return api.signup({data}).then((resp) => {
-      dispatch({ type: types.SIGNUP, data: resp.data });
-      history.pushState(null, '/projects');
-    });
+    dispatch({ type: types.AUTH_START, data: data });
+    return api.signup({data})
+      .then((resp) => {
+        dispatch({ type: types.SIGNUP, data: resp.data });
+        history.pushState(null, '/projects');
+      })
+      .catch((error) => {
+        dispatch({ type: types.AUTH_ERROR, data: error });
+      });
   };
 }
 

@@ -1,8 +1,13 @@
 import axios from 'axios';
 import _ from 'lodash';
 
-import {flattenResponse, decamelizeKeys} from '../utils/APIHelpers';
-import configApi from '../config/api';
+import {
+  flattenResponse,
+  decamelizeKeys,
+  transformServerError,
+} from 'utils/APIHelpers';
+
+import configApi from 'config/api';
 
 let accessToken = localStorage.getItem('checklyst:auth:accessToken');
 let clientToken = localStorage.getItem('checklyst:auth:clientToken');
@@ -44,8 +49,9 @@ const send = (method, url, data) => {
       clientToken: response.headers.client,
       uidToken: response.headers.uid,
     });
-
     return response.data;
+  }).catch((error) => {
+    throw transformServerError(error);
   });
 };
 

@@ -4,6 +4,8 @@ export const RECEIVED_ENTITIES = 'RECEIVED_ENTITIES';
 export const SIGNIN = 'SIGNIN';
 export const SIGNUP = 'SIGNUP';
 export const SIGNOUT = 'SIGNOUT';
+export const AUTH_START = 'AUTH_START';
+export const AUTH_ERROR = 'AUTH_ERROR';
 
 export const ADD_PROJECT = 'ADD_PROJECT';
 export const INSERT_PROJECT = 'INSERT_PROJECT';

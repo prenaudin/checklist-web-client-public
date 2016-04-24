@@ -13,6 +13,11 @@
   &:hover {
     cursor: pointer;
   }
+
+  &:disabled {
+    cursor: progress;
+    opacity: .6;
+  }
 }
 
 .btn-default {

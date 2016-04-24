@@ -33,7 +33,7 @@ class AuthPage extends React.Component {
 }
 
 AuthPage.propTypes = {
-  children: React.PropTypes.object.isRequired,
+  children: React.PropTypes.any,
 };
 
 export default AuthPage;

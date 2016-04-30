@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router';
+import { Link } from 'react-router';
 import AppPage from 'components/App/Page';
 import AppHeaderTitleLink from 'components/App/HeaderTitleLink';
 import AppHeaderTitleItem from 'components/App/HeaderTitleItem';
@@ -7,7 +7,8 @@ import AppHeaderTitleItem from 'components/App/HeaderTitleItem';
 class ProjectsNewPage extends React.Component {
   constructor(props) {
     super(props);
-
+    this.handleChangeTitle = this.handleChangeTitle.bind(this);
+    this.handleClickSave = this.handleClickSave.bind(this);
     this.state = {
       title: '',
     };
@@ -30,7 +31,7 @@ class ProjectsNewPage extends React.Component {
               type="text"
               autoFocus
               value={this.state.title}
-              onChange={this.handleChangeTitle.bind(this)}
+              onChange={this.handleChangeTitle}
               placeholder="Awesome Project"
             />
           </label>
@@ -40,7 +41,7 @@ class ProjectsNewPage extends React.Component {
               Cancel
             </Link>
 
-            <div className="btn btn-primary" onClick={this.handleClickSave.bind(this)}>
+            <div className="btn btn-primary" onClick={this.handleClickSave}>
               Save
             </div>
           </div>

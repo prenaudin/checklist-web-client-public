@@ -2,23 +2,21 @@ import React from 'react';
 import classNames from 'classnames';
 import AppHeader from 'components/App/Header';
 
-class AppPage extends React.Component {
-  render() {
-    const className = classNames('page', this.props.id);
-    let header = false;
-    if (this.props.title) {
-      header = (
-        <AppHeader title={this.props.title}/>
-      );
-    }
-    return (
-      <div className={className}>
-        { header }
-        { this.props.children }
-      </div>
+const AppPage = (props) => {
+  const className = classNames('page', props.id);
+  let header = false;
+  if (props.title) {
+    header = (
+      <AppHeader title={props.title} />
     );
   }
-}
+  return (
+    <div className={className}>
+      {header}
+      {props.children}
+    </div>
+  );
+};
 
 AppPage.propTypes = {
   children: React.PropTypes.any.isRequired,

@@ -4,6 +4,11 @@ import Immutable from 'immutable';
 import Markdown from 'react-remarkable';
 
 class ChecklistsRunTestsItem extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleClickAddComment = this.handleClickAddComment.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
 
   render() {
     let comment = (
@@ -11,7 +16,7 @@ class ChecklistsRunTestsItem extends React.Component {
         className="checklists-run-input form-input form-input--md"
         type="text"
         value={this.props.test.comment}
-        onChange={this.handleChange.bind(this)}
+        onChange={this.handleChange}
       />
     );
 
@@ -19,7 +24,7 @@ class ChecklistsRunTestsItem extends React.Component {
       comment = (
         <div
           className="checklists-run-tests-item-add-comment"
-          onClick={this.handleClickAddComment.bind(this)}
+          onClick={this.handleClickAddComment}
         >
           + Add a comment
         </div>

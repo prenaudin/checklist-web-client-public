@@ -4,6 +4,11 @@ import AuthPage from 'components/Auth/Page';
 import User from 'models/User';
 
 class AuthForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleClickSubmit = this.handleClickSubmit.bind(this);
+  }
+
   render() {
     const authError = this.props.user.get('authError');
     const className = classNames('auth form-group', `auth-${this.props.id}`);
@@ -26,7 +31,7 @@ class AuthForm extends React.Component {
           />
           {
             (() => {
-              if ( !authError ) { return false; }
+              if (!authError) { return false; }
               return (
                 <div className="auth-error">
                   {authError.get('message')}
@@ -37,7 +42,7 @@ class AuthForm extends React.Component {
           <button
             disabled={this.props.user.get('isSigning')}
             className="auth-btn btn btn-primary"
-            onClick={this.handleClickSubmit.bind(this)}
+            onClick={this.handleClickSubmit}
           >
             {this.props.submitLabel}
           </button>
@@ -49,7 +54,7 @@ class AuthForm extends React.Component {
   handleClickSubmit() {
     const email = this.refs.email.value;
     const password = this.refs.password.value;
-    this.props.onSubmit({email, password});
+    this.props.onSubmit({ email, password });
   }
 }
 

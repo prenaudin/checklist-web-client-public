@@ -45,16 +45,16 @@ ChecklistsIndexContainer.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   const { projectId } = ownProps.params;
-  const project = state.projects.get(projectId) || new Project({id: projectId});
+  const project = state.projects.get(projectId) || new Project({ id: projectId });
 
   const checklists = getChecklistsByProject({
     checklists: state.checklists,
-    projectId: projectId,
+    projectId,
   });
 
   return {
-    checklists: checklists,
-    project: project,
+    checklists,
+    project,
     versions: state.versions,
   };
 }

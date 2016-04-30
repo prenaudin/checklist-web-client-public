@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import Immutable from 'immutable';
-import {Link} from 'react-router';
+import { Link } from 'react-router';
 import ChecklistsFormTestSuiteItem from 'components/Checklists/Form/TestSuiteItem';
 
 const TestRecord = Immutable.Record({
@@ -9,20 +9,19 @@ const TestRecord = Immutable.Record({
   title: '',
 });
 
-const createTest = () => {
-  return new TestRecord({ id: _.uniqueId('testSuiteRecordId') });
-};
+const createTest = () => new TestRecord({ id: _.uniqueId('testSuiteRecordId') });
 
-const serializeTestSuite = (testSuite) => {
-  return testSuite.filter((test) => {
-    return !_.isEmpty(test.get('title'));
-  });
-};
+const serializeTestSuite = (testSuite) =>
+  testSuite.filter((test) => !_.isEmpty(test.get('title')));
 
 class ChecklistsForm extends React.Component {
 
   constructor(props) {
     super(props);
+    this.handleChangeTitle = this.handleChangeTitle.bind(this);
+    this.handleChangeTestTitle = this.handleChangeTestTitle.bind(this);
+    this.handleChangeLastTestTitle = this.handleChangeLastTestTitle.bind(this);
+    this.handleClickSave = this.handleClickSave.bind(this);
 
     const test = createTest();
     this.state = {
@@ -47,7 +46,7 @@ class ChecklistsForm extends React.Component {
             type="text"
             autoFocus
             value={this.state.title}
-            onChange={this.handleChangeTitle.bind(this)}
+            onChange={this.handleChangeTitle}
             placeholder="Awesome Checklist"
           />
         </label>
@@ -61,8 +60,8 @@ class ChecklistsForm extends React.Component {
                 index={testIndex}
                 test={test}
                 isLast={testIndex === this.state.testSuite.size}
-                onChangeTestTitle={this.handleChangeTestTitle.bind(this)}
-                onChangeLastTestTitle={this.handleChangeLastTestTitle.bind(this)}
+                onChangeTestTitle={this.handleChangeTestTitle}
+                onChangeLastTestTitle={this.handleChangeLastTestTitle}
               />
             );
           }).toArray()
@@ -83,10 +82,7 @@ class ChecklistsForm extends React.Component {
               <Link className="btn btn-default" to={`/projects/${projectId}/checklists`}>
                 Cancel
               </Link>
-              <div
-                className="btn btn-primary"
-                onClick={this.handleClickSave.bind(this)}
-              >
+              <div className="btn btn-primary" onClick={this.handleClickSave}>
                 Save
               </div>
             </div>
@@ -97,7 +93,7 @@ class ChecklistsForm extends React.Component {
   }
 
   handleChangeTitle(e) {
-    this.setState({title: e.target.value});
+    this.setState({ title: e.target.value });
   }
 
   handleChangeTestTitle(e, id) {
@@ -123,9 +119,9 @@ class ChecklistsForm extends React.Component {
     const { projectId } = this.props;
     const data = {
       title: this.state.title,
-      testSuite: serializeTestSuite(this.state.testSuite).map((test) => {
-        return test.get('title');
-      }).toArray(),
+      testSuite: serializeTestSuite(this.state.testSuite).map((test) => (
+        test.get('title')
+      )).toArray(),
       project: projectId,
     };
     this.props.onClickSave(data);

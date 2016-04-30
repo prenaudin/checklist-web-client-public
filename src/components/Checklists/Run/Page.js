@@ -24,39 +24,34 @@ const createTest = (params = {}) => {
   return new TestRecord(testData);
 };
 
-const countOk = (tests) => {
-  return tests.filter(test => test.status === 'ok').size;
-};
+const countOk = (tests) => tests.filter(test => test.status === 'ok').size;
+const countNok = (tests) => tests.filter(test => test.status === 'nok').size;
+const countPending = (tests) => tests.filter(test => test.status === 'pending').size;
 
-const countNok = (tests) => {
-  return tests.filter(test => test.status === 'nok').size;
-};
-
-const countPending = (tests) => {
-  return tests.filter(test => test.status === 'pending').size;
-};
-
-const initTests = (testSuite) => {
-  return _.reduce(testSuite, (memo, testTitle) => {
-    const newTest = createTest({title: testTitle});
+const initTests = (testSuite) => (
+  _.reduce(testSuite, (memo, testTitle) => {
+    const newTest = createTest({ title: testTitle });
     return memo.set(newTest.id, newTest);
-  }, new Immutable.Map());
-};
+  }, new Immutable.Map())
+);
 
 class ChecklistsRunPage extends React.Component {
 
   constructor(props) {
     super(props);
+    this.handleChangeTestComment = this.handleChangeTestComment.bind(this);
+    this.handleShowTestComment = this.handleShowTestComment.bind(this);
+    this.handleClickSave = this.handleClickSave.bind(this);
 
     const { checklist } = props;
     this.state = {
-      title: 'v' + (checklist.get('versions').size + 1),
+      title: `v${checklist.get('versions').size + 1}`,
       tests: initTests(checklist.get('testSuite').toJS()),
     };
   }
 
   render() {
-    const {project, checklist} = this.props;
+    const { project, checklist } = this.props;
     let testIndex = 0;
 
     return (
@@ -65,10 +60,10 @@ class ChecklistsRunPage extends React.Component {
         title={[
           <AppHeaderTitleLink key="projects" to="/projects"> Projects </AppHeaderTitleLink>,
           <AppHeaderTitleLink key="checklist" to={`/projects/${project.get('id')}/checklists`}>
-            { project.get('title') }
+            {project.get('title')}
           </AppHeaderTitleLink>,
           <AppHeaderTitleItem key="new">
-            Run { checklist.get('title') }
+            Run {checklist.get('title')}
           </AppHeaderTitleItem>,
         ]}
       >
@@ -89,9 +84,10 @@ class ChecklistsRunPage extends React.Component {
                 key={test.id}
                 index={testIndex}
                 test={test}
-                onChangeTestStatus={(status) => this.handleChangeTestStatus({id: test.id, status})}
-                onChangeTestComment={this.handleChangeTestComment.bind(this)}
-                onShowTestComment={this.handleShowTestComment.bind(this)}
+                onChangeTestStatus={(status) =>
+                  this.handleChangeTestStatus({ id: test.id, status })}
+                onChangeTestComment={this.handleChangeTestComment}
+                onShowTestComment={this.handleShowTestComment}
               />
             );
           }).toArray()
@@ -99,24 +95,24 @@ class ChecklistsRunPage extends React.Component {
 
         <div className="form-footer-container">
           <div className="form-footer clearfix">
-            <div className="form-resume" style={{marginRight: '30px'}}>
-              <div className="form-resume-count" style={{color: '#7ED321', fontWeight: '300'}}>
+            <div className="form-resume" style={{ marginRight: '30px' }}>
+              <div className="form-resume-count" style={{ color: '#7ED321', fontWeight: '300' }}>
                 {countOk(this.state.tests)}
               </div>
               <div className="form-resume-subtitle">
                 👍
               </div>
             </div>
-            <div className="form-resume" style={{marginRight: '30px'}}>
-              <div className="form-resume-count" style={{color: '#F5A623', fontWeight: '300'}}>
+            <div className="form-resume" style={{ marginRight: '30px' }}>
+              <div className="form-resume-count" style={{ color: '#F5A623', fontWeight: '300' }}>
                 {countNok(this.state.tests)}
               </div>
               <div className="form-resume-subtitle">
                 👎
               </div>
             </div>
-            <div className="form-resume" style={{marginRight: '30px'}}>
-              <div className="form-resume-count" style={{color: '#888888', fontWeight: '300'}}>
+            <div className="form-resume" style={{ marginRight: '30px' }}>
+              <div className="form-resume-count" style={{ color: '#888888', fontWeight: '300' }}>
                 {countPending(this.state.tests)}
               </div>
               <div className="form-resume-subtitle">
@@ -130,7 +126,7 @@ class ChecklistsRunPage extends React.Component {
               </Link>
               <div
                 className="btn btn-primary"
-                onClick={this.handleClickSave.bind(this)}
+                onClick={this.handleClickSave}
               >
                 Save
               </div>
@@ -142,11 +138,11 @@ class ChecklistsRunPage extends React.Component {
   }
 
   handleChangeTitle(e) {
-    this.setState({title: e.target.value});
+    this.setState({ title: e.target.value });
   }
 
-  handleChangeTestStatus({id, status}) {
-    this.setState({tests: this.state.tests.setIn([id, 'status'], status)});
+  handleChangeTestStatus({ id, status }) {
+    this.setState({ tests: this.state.tests.setIn([id, 'status'], status) });
   }
 
   handleChangeTestComment(e, id) {

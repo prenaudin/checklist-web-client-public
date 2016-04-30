@@ -6,9 +6,11 @@ import Version from 'models/Version';
 
 class ChecklistsIndexItem extends React.Component {
 
-  constructor() {
-    super();
-
+  constructor(props) {
+    super(props);
+    this.handleClickOptions = this.handleClickOptions.bind(this);
+    this.handleClickDelete = this.handleClickDelete.bind(this);
+    this.handleClickClose = this.handleClickClose.bind(this);
     this.state = {
       showOptions: false,
     };
@@ -36,9 +38,9 @@ class ChecklistsIndexItem extends React.Component {
     if (lastVersion) {
       lastVersionContent = (
         <span>
-          Version { lastVersion.get('title') }
-          { ' • ' }
-          { moment(lastVersion.get('updatedAt')).format('DD/MM/YY') }
+          Version {lastVersion.get('title')}
+          {' • '}
+          {moment(lastVersion.get('updatedAt')).format('DD/MM/YY')}
         </span>
       );
     }
@@ -47,12 +49,12 @@ class ChecklistsIndexItem extends React.Component {
       <div className="checklists-list-item--default">
         <div
           className="checklists-list-item-show-options"
-          onClick={this.handleClickOptions.bind(this)}
+          onClick={this.handleClickOptions}
         >
           <span className="checklists-list-item-show-options-content">
             Options
           </span>
-          <Icon id="options"/>
+          <Icon id="options" />
         </div>
 
         <div className="checklists-list-item-title">
@@ -65,7 +67,7 @@ class ChecklistsIndexItem extends React.Component {
           <div className="checklists-list-item-counters-list clearfix">
             <div className="checklists-list-item-counters-item">
               <div className="checklists-list-item-counters-item-count">
-                { lastVersion ? lastVersion.getOkCount() : '-' }
+                {lastVersion ? lastVersion.getOkCount() : '-'}
               </div>
               <div className="checklists-list-item-counters-item-label">
                 👍
@@ -73,7 +75,7 @@ class ChecklistsIndexItem extends React.Component {
             </div>
             <div className="checklists-list-item-counters-item">
               <div className="checklists-list-item-counters-item-count">
-                { lastVersion ? lastVersion.getNokCount() : '-' }
+                {lastVersion ? lastVersion.getNokCount() : '-'}
               </div>
               <div className="checklists-list-item-counters-item-label">
                 👎
@@ -81,7 +83,7 @@ class ChecklistsIndexItem extends React.Component {
             </div>
             <div className="checklists-list-item-counters-item">
               <div className="checklists-list-item-counters-item-count">
-                { lastVersion ? lastVersion.getPendingCount() : '-' }
+                {lastVersion ? lastVersion.getPendingCount() : '-'}
               </div>
               <div className="checklists-list-item-counters-item-label">
                 💤
@@ -105,37 +107,37 @@ class ChecklistsIndexItem extends React.Component {
       <div className="checklists-list-item--options">
         <div
           className="checklists-list-item-close-options"
-          onClick={this.handleClickClose.bind(this)}
+          onClick={this.handleClickClose}
         >
-          <Icon id="close"/>
+          <Icon id="close" />
         </div>
         <div className="checklists-list-item-actions">
           <Link
             className="checklists-list-item-actions-item"
             to={`/projects/${checklist.get('project')}/checklists/${checklist.get('id')}/share`}
           >
-            <Icon id="share"/>
+            <Icon id="share" />
             Share
           </Link>
           <Link
             className="checklists-list-item-actions-item"
             to={`/projects/${checklist.get('project')}/checklists/${checklist.get('id')}/edit`}
           >
-            <Icon id="edit"/>
+            <Icon id="edit" />
             Edit
           </Link>
           <Link
             className="checklists-list-item-actions-item"
             to={`/projects/${checklist.get('project')}/checklists/${checklist.get('id')}/duplicate`}
           >
-            <Icon id="duplicate"/>
+            <Icon id="duplicate" />
             Duplicate
           </Link>
           <div
             className="checklists-list-item-actions-item"
-            onClick={this.handleClickDelete.bind(this)}
+            onClick={this.handleClickDelete}
           >
-            <Icon id="delete"/>
+            <Icon id="delete" />
             Delete
           </div>
         </div>
@@ -144,11 +146,11 @@ class ChecklistsIndexItem extends React.Component {
   }
 
   handleClickOptions() {
-    this.setState({showOptions: true});
+    this.setState({ showOptions: true });
   }
 
   handleClickClose() {
-    this.setState({showOptions: false});
+    this.setState({ showOptions: false });
   }
 
   handleClickDelete() {

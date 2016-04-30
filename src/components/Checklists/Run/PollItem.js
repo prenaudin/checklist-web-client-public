@@ -2,32 +2,32 @@ import React from 'react';
 import classNames from 'classnames';
 
 const {
-  Component,
   PropTypes,
 } = React;
 
-class ChecklistsRunPollItem extends Component {
+const ChecklistsRunPollItem = ({
+  status,
+  onClick,
+  enabled,
+  label,
+}) => {
+  const className = classNames(
+    'checklists-poll-item',
+    `checklists-poll-item--${status}`,
+    {
+      'is-enabled': enabled,
+    }
+  );
 
-  render() {
-    const className = classNames(
-      'checklists-poll-item',
-      `checklists-poll-item--${this.props.status}`,
-        {
-          'is-enabled': this.props.enabled,
-        }
-    );
-
-    return (
-      <div
-        className={className}
-        onClick={this.props.onClick}
-      >
-        {this.props.label}
-      </div>
-    );
-  }
-
-}
+  return (
+    <div
+      className={className}
+      onClick={onClick}
+    >
+      {label}
+    </div>
+  );
+};
 
 ChecklistsRunPollItem.propTypes = {
   label: PropTypes.string.isRequired,

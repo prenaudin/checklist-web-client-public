@@ -15,14 +15,12 @@ class ProjectsIndexContainer extends Component {
     return (
       <ProjectsIndexPage>
         {
-          projects.map((project) => {
-            return (
-              <ProjectsIndexItem
-                key={project.get('id')}
-                project={project}
-              />
-            );
-          }).toArray()
+          projects.map((project) => (
+            <ProjectsIndexItem
+              key={project.get('id')}
+              project={project}
+            />
+          )).toArray()
         }
       </ProjectsIndexPage>
     );

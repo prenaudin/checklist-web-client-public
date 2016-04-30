@@ -9,7 +9,7 @@ class HeaderUserContainer extends React.Component {
     const { user } = this.props;
     if (!user.get('isSignedIn')) { return false; }
     return (
-      <HeaderUser user={user}/>
+      <HeaderUser user={user} />
     );
   }
 }

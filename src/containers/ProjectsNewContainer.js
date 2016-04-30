@@ -1,17 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import ProjectsNewPage from 'components/Projects/New/Page';
 import { addProject } from 'actions/projects';
 
-class ProjectsNewContainer extends Component {
-  render() {
-    return (
-      <ProjectsNewPage
-        onAddProject={this.props.onAddProject}
-      />
-    );
-  }
-}
+const ProjectsNewContainer = (props) => <ProjectsNewPage {...props} />;
 
 ProjectsNewContainer.propTypes = {
   onAddProject: React.PropTypes.func.isRequired,

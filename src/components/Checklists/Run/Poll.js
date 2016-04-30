@@ -2,38 +2,34 @@ import React from 'react';
 import ChecklistsRunPollItem from './PollItem';
 
 const {
-  Component,
   PropTypes,
 } = React;
 
-class ChecklistsRunPoll extends Component {
-
-  render() {
-    return (
-      <div className="checklists-poll">
-        <ChecklistsRunPollItem
-          label="👍"
-          status="ok"
-          enabled={this.props.status === 'ok'}
-          onClick={() => this.props.onClickItem('ok')}
-        />
-        <ChecklistsRunPollItem
-          label="👎"
-          status="nok"
-          enabled={this.props.status === 'nok'}
-          onClick={() => this.props.onClickItem('nok')}
-        />
-        <ChecklistsRunPollItem
-          label="💤"
-          status="pending"
-          enabled={this.props.status === 'pending'}
-          onClick={() => this.props.onClickItem('pending')}
-        />
-      </div>
-    );
-  }
-
-}
+const ChecklistsRunPoll = (props) => {
+  const { status, onClickItem } = props;
+  return (
+    <div className="checklists-poll">
+      <ChecklistsRunPollItem
+        label="👍"
+        status="ok"
+        enabled={status === 'ok'}
+        onClick={() => onClickItem('ok')}
+      />
+      <ChecklistsRunPollItem
+        label="👎"
+        status="nok"
+        enabled={status === 'nok'}
+        onClick={() => onClickItem('nok')}
+      />
+      <ChecklistsRunPollItem
+        label="💤"
+        status="pending"
+        enabled={status === 'pending'}
+        onClick={() => onClickItem('pending')}
+      />
+    </div>
+  );
+};
 
 
 ChecklistsRunPoll.propTypes = {

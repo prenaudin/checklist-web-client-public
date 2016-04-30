@@ -6,14 +6,15 @@ import ErrorRecord from 'models/ErrorRecord';
 
 const flattenObject = function flattenObject(object) {
   const relationships = _.reduce(object.relationships, (result, value, key) => {
+    const formatResult = result;
     if (_.isArray(value.data)) {
-      result[key] = _.pluck(value.data, 'id');
+      formatResult[key] = _.pluck(value.data, 'id');
     } else {
       if (value.data) {
-        result[key] = value.data.id;
+        formatResult[key] = value.data.id;
       }
     }
-    return result;
+    return formatResult;
   }, {});
 
   return _(object)
@@ -49,20 +50,20 @@ export const flattenResponse = function flattenResponse(response) {
 
   const entities = _(flatten)
     .flatten()
-    .groupBy((value) => { return value.type; })
-    .mapValues((value) => {
-      return _.reduce(value, (result, resultValue) => {
-        result[resultValue.id] = camelizeKeys(resultValue);
-        return result;
-      }, {});
-    })
-    .value();
+    .groupBy((value) => value.type)
+    .mapValues((value) =>
+      _.reduce(value, (result, resultValue) => {
+        const formatResult = result;
+        formatResult[resultValue.id] = camelizeKeys(resultValue);
+        return formatResult;
+      }, {})
+    ).value();
 
   const results = _(entities)
-    .mapValues((value) => { return _.keys(value); })
+    .mapValues((value) => _.keys(value))
     .value();
 
-  return {results, entities};
+  return { results, entities };
 };
 
 export const transformServerError = function transformServerError(error) {

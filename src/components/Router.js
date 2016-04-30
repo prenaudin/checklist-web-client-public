@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import history from '../config/history';
-import {Router, Route, Redirect} from 'react-router';
+import { Router, Route, IndexRoute, Redirect } from 'react-router';
 
 import Home from './Home';
 
-import AuthSignup from './Auth/Signup';
-import AuthSignin from './Auth/Signin';
+import AuthSignupContainer from 'containers/AuthSignupContainer';
+import AuthSigninContainer from 'containers/AuthSigninContainer';
 
 import App from 'containers/App';
 import ProjectsIndexContainer from 'containers/ProjectsIndexContainer';
@@ -21,31 +21,24 @@ class AppRouter extends Component {
     return (
       <Router history={history}>
         <Route path="home" component={Home}/>
-        <Route path="signup" component={AuthSignup}/>
-        <Route path="signin" component={AuthSignin}/>
+        <Route path="signup" component={AuthSignupContainer}/>
+        <Route path="signin" component={AuthSigninContainer}/>
+
         <Route component={App}>
           <Route path="profile" component={ProfileContainer}/>
-          <Route path="projects" component={ProjectsIndexContainer}/>
-          <Route
-            path="projects/new"
-            component={ProjectsNewContainer}
-          />
-          <Route
-            path="projects/:projectId/checklists"
-            component={ChecklistsIndexContainer}
-          />
-          <Route
-            path="projects/:projectId/checklists/new"
-            component={ChecklistsNewContainer}
-          />
-          <Route
-            path="projects/:projectId/checklists/:checklistId/edit"
-            component={ChecklistsEditContainer}
-          />
-          <Route
-            path="projects/:projectId/checklists/:checklistId/run"
-            component={ChecklistsRunContainer}
-          />
+
+          <Route path="projects">
+            <IndexRoute component={ProjectsIndexContainer}/>
+            <Route path="new" component={ProjectsNewContainer}/>
+          </Route>
+
+          <Route path="projects/:projectId/checklists">
+            <IndexRoute component={ChecklistsIndexContainer}/>
+            <Route path="new" component={ChecklistsNewContainer}/>
+            <Route path=":checklistId/edit" component={ChecklistsEditContainer}/>
+            <Route path=":checklistId/run" component={ChecklistsRunContainer}/>
+          </Route>
+
           <Redirect from="/" to="/home"/>
         </Route>
       </Router>

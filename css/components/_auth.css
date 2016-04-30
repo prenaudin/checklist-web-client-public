@@ -28,6 +28,10 @@
   margin-bottom: 40px;
 }
 
+.auth-error {
+  color: #D0021B;
+}
+
 .auth-btn.btn {
   font-size: 18px;
   margin-top: 40px;
@@ -53,4 +57,14 @@
 
 .auth > .form-input {
   margin: 10px 0;
+}
+
+@media (max-width: 1080px) {
+  .auth-page-form {
+    width: 100%;
+  }
+
+  .auth-page-illustration {
+    display: none;
+  }
 }

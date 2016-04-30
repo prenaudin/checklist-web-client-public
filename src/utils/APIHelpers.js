@@ -1,6 +1,9 @@
 import humps from 'humps';
 import _ from 'lodash';
 
+import * as ErrorTypes from 'constants/ErrorTypes';
+import ErrorRecord from 'models/ErrorRecord';
+
 const flattenObject = function flattenObject(object) {
   const relationships = _.reduce(object.relationships, (result, value, key) => {
     if (_.isArray(value.data)) {
@@ -60,4 +63,21 @@ export const flattenResponse = function flattenResponse(response) {
     .value();
 
   return {results, entities};
+};
+
+export const transformServerError = function transformServerError(error) {
+  switch (error.status) {
+    case 401:
+      return new ErrorRecord({
+        type: ErrorTypes.UNAUTHORIZED,
+        message: error.data.errors[0],
+      });
+    case 422:
+      return new ErrorRecord({
+        type: ErrorTypes.UNPROCESSABLE_ENTITY,
+        message: error.data.errors.full_messages.join('\n'),
+      });
+    default:
+      return false;
+  }
 };

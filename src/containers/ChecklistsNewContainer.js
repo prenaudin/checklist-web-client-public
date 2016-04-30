@@ -26,7 +26,7 @@ function mapDispatchToProps(dispatch, ownProps) {
     onAddChecklist: (data) => {
       const { projectId } = ownProps.params;
       dispatch(addChecklist(data));
-      ownProps.history.pushState(null, `/projects/${projectId}/checklists`);
+      ownProps.history.push(`/projects/${projectId}/checklists`);
     },
   };
 }

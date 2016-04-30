@@ -79,6 +79,6 @@ export const transformServerError = function transformServerError(error) {
         message: error.data.errors.full_messages.join('\n'),
       });
     default:
-      return false;
+      return error;
   }
 };

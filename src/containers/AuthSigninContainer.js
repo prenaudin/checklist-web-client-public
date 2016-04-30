@@ -5,10 +5,6 @@ import AuthSignin from 'components/Auth/Signin';
 
 const AuthSigninContainer = (props) => <AuthSignin {...props} />;
 
-AuthSigninContainer.propTypes = {
-  children: React.PropTypes.any.isRequired,
-};
-
 function mapStateToProps(state) {
   return {
     user: state.user,

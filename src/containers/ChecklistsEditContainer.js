@@ -52,7 +52,7 @@ function mapDispatchToProps(dispatch, ownProps) {
       const { checklistId, projectId } = ownProps.params;
       const updateData = _.extend({}, data, { checklistId });
       dispatch(updateChecklist(updateData));
-      ownProps.history.pushState(null, `/projects/${projectId}/checklists`);
+      ownProps.history.push(`/projects/${projectId}/checklists`);
     },
   };
 }

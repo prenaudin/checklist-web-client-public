@@ -13,7 +13,7 @@ function mapDispatchToProps(dispatch, ownProps) {
   return {
     onAddProject: (data) => {
       dispatch(addProject(data));
-      ownProps.history.pushState(null, '/projects');
+      ownProps.history.push('/projects');
     },
   };
 }

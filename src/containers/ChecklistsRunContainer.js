@@ -50,7 +50,7 @@ function mapDispatchToProps(dispatch, ownProps) {
     onCreateVersion: (data) => {
       const { projectId, checklistId } = ownProps.params;
       dispatch(createVersion({ projectId, checklistId, data }));
-      ownProps.history.pushState(null, `/projects/${projectId}/checklists`);
+      ownProps.history.push(`/projects/${projectId}/checklists`);
     },
   };
 }

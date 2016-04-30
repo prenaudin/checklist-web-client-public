@@ -8,7 +8,7 @@ export function signin(data) {
     return api.signin({ data })
       .then((resp) => {
         dispatch({ type: types.SIGNIN, data: resp.data });
-        browserHistory.push(null, '/projects');
+        browserHistory.push('/projects');
       })
       .catch((error) => {
         dispatch({ type: types.AUTH_ERROR, data: error });
@@ -22,7 +22,7 @@ export function signup(data) {
     return api.signup({ data })
       .then((resp) => {
         dispatch({ type: types.SIGNUP, data: resp.data });
-        history.pushState(null, '/projects');
+        browserHistory.push('/projects');
       })
       .catch((error) => {
         dispatch({ type: types.AUTH_ERROR, data: error });
@@ -34,7 +34,7 @@ export function signout() {
   return (dispatch) =>
     api.signout().then(() => {
       dispatch({ type: types.SIGNOUT, data: {} });
-      history.pushState(null, '/home');
+      browserHistory.push('/home');
     });
 }
 
@@ -45,6 +45,6 @@ export function validateToken() {
         dispatch({ type: types.SIGNIN, data: resp.data });
       })
       .catch(() => {
-        history.pushState(null, '/home');
+        browserHistory.push('/home');
       });
 }

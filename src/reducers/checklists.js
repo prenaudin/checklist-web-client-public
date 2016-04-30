@@ -5,11 +5,8 @@ import ChecklistMap from 'models/ChecklistMap';
 
 const initialState = new ChecklistMap();
 
-const mergeChecklists = (state, newChecklists) => {
-  return state.merge(newChecklists.map((checklist) => {
-    return new Checklist(checklist);
-  }));
-};
+const mergeChecklists = (state, newChecklists) =>
+  state.merge(newChecklists.map((checklist) => new Checklist(checklist)));
 
 export default function checklists(state = initialState, action) {
   switch (action.type) {

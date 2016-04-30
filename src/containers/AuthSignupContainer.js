@@ -3,13 +3,7 @@ import { connect } from 'react-redux';
 import { signup } from 'actions/auth';
 import AuthSignup from 'components/Auth/Signup';
 
-class AuthSignupContainer extends React.Component {
-  render() {
-    return (
-      <AuthSignup {...this.props}/>
-    );
-  }
-}
+const AuthSignupContainer = (props) => <AuthSignup {...props} />;
 
 function mapStateToProps(state) {
   return {

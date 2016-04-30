@@ -5,11 +5,8 @@ import VersionMap from 'models/VersionMap';
 
 const initialState = new VersionMap();
 
-const mergeVersions = (state, newVersions) => {
-  return state.merge(newVersions.map((version) => {
-    return new Version(version);
-  }));
-};
+const mergeVersions = (state, newVersions) =>
+  state.merge(newVersions.map((version) => new Version(version)));
 
 export default function versions(state = initialState, action) {
   switch (action.type) {

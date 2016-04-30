@@ -3,13 +3,7 @@ import { connect } from 'react-redux';
 import { signin } from 'actions/auth';
 import AuthSignin from 'components/Auth/Signin';
 
-class AuthSigninContainer extends React.Component {
-  render() {
-    return (
-      <AuthSignin {...this.props}/>
-    );
-  }
-}
+const AuthSigninContainer = (props) => <AuthSignin {...props} />;
 
 AuthSigninContainer.propTypes = {
   children: React.PropTypes.any.isRequired,

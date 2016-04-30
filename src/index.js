@@ -7,7 +7,7 @@ require('application.css');
 
 render(
   <Provider store={store}>
-    <Router/>
+    <Router />
   </Provider>,
   document.getElementById('app-container')
 );

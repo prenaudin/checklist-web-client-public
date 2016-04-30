@@ -1,20 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import ChecklistsNewPage from 'components/Checklists/New/Page';
 import { addChecklist } from 'actions/checklists';
 import Project from 'models/Project';
 
-class ChecklistsNewContainer extends Component {
-  render() {
-    return (
-      <ChecklistsNewPage
-        projectId={this.props.projectId}
-        project={this.props.project}
-        onAddChecklist={this.props.onAddChecklist}
-      />
-    );
-  }
-}
+const ChecklistsNewContainer = (props) => <ChecklistsNewPage {...props} />;
 
 ChecklistsNewContainer.propTypes = {
   projectId: React.PropTypes.string.isRequired,

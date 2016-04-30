@@ -25,24 +25,24 @@ const setTokens = (tokens) => {
 const send = (method, url, data) => {
   const headers = {
     'Content-Type': 'application/json',
-    'Accept': 'application/json',
+    Accept: 'application/json',
   };
 
   if (clientToken && accessToken && uidToken) {
     _.extend(headers, {
-      'client': clientToken,
+      client: clientToken,
       'access-token': accessToken,
-      'uid': uidToken,
+      uid: uidToken,
       'token-type': 'Bearer',
     });
   }
 
   return axios({
     baseURL: configApi.endpoint,
-    url: url,
-    method: method,
-    data: data,
-    headers: headers,
+    url,
+    method,
+    data,
+    headers,
   }).then((response) => {
     setTokens({
       accessToken: response.headers['access-token'],
@@ -56,70 +56,51 @@ const send = (method, url, data) => {
 };
 
 const ServerAPI = {
+  signin: ({ data }) => send('post', '/api/auth/sign_in', decamelizeKeys(data)),
 
-  signin: ({data}) => {
-    return send('post', '/api/auth/sign_in', decamelizeKeys(data));
-  },
+  signup: ({ data }) => send('post', '/api/auth', decamelizeKeys(data)),
 
-  signup: ({data}) => {
-    return send('post', '/api/auth', decamelizeKeys(data));
-  },
+  signout: () => send('delete', '/api/auth/sign_out'),
 
-  signout: () => {
-    return send('delete', '/api/auth/sign_out');
-  },
+  validateToken: () => send('get', '/api/auth/validate_token'),
 
-  validateToken: () => {
-    return send('get', '/api/auth/validate_token');
-  },
+  createProject: ({ data }) =>
+    send('post', '/api/projects', { data })
+      .then(flattenResponse),
 
-  createProject: ({data}) => {
-    return send('post', '/api/projects', {data})
-      .then(flattenResponse);
-  },
+  findAllProjects: () =>
+    send('get', '/api/projects?include=checklists,user')
+      .then(flattenResponse),
 
-  findAllProjects: () => {
-    return send('get', '/api/projects?include=checklists,user')
-      .then(flattenResponse);
-  },
+  findProject: (projectId) =>
+    send('get', `/api/projects/${projectId}?include=checklists,versions,user`)
+      .then(flattenResponse),
 
-  findProject: (projectId) => {
-    return send('get', `/api/projects/${projectId}?include=checklists,versions,user`)
-      .then(flattenResponse);
-  },
-
-  createChecklist: ({data}) => {
-    return send('post', `/api/projects/${data.project}/checklists`, {
+  createChecklist: ({ data }) =>
+    send('post', `/api/projects/${data.project}/checklists`, {
       data: decamelizeKeys(data),
-    }).then(flattenResponse);
-  },
+    }).then(flattenResponse),
 
-  updateChecklist: ({data}) => {
-    return send('put', `/api/projects/${data.project}/checklists/${data.checklistId}`, {
+  updateChecklist: ({ data }) =>
+    send('put', `/api/projects/${data.project}/checklists/${data.checklistId}`, {
       data: decamelizeKeys(data),
-    }).then(flattenResponse);
-  },
+    }).then(flattenResponse),
 
-  findChecklists: ({projectId}) => {
-    return send('get', `/api/projects/${projectId}/checklists?include=project,last_version`)
-      .then(flattenResponse);
-  },
+  findChecklists: ({ projectId }) =>
+    send('get', `/api/projects/${projectId}/checklists?include=project,last_version`)
+      .then(flattenResponse),
 
-  findChecklist: ({projectId, checklistId}) => {
-    return send('get', `/api/projects/${projectId}/checklists/${checklistId}?include=project,last_version`)
-      .then(flattenResponse);
-  },
+  findChecklist: ({ projectId, checklistId }) =>
+    send('get', `/api/projects/${projectId}/checklists/${checklistId}?include=project,last_version`)
+      .then(flattenResponse),
 
-  deleteChecklist: ({projectId, checklistId}) => {
-    return send('delete', `/api/projects/${projectId}/checklists/${checklistId}`);
-  },
+  deleteChecklist: ({ projectId, checklistId }) =>
+    send('delete', `/api/projects/${projectId}/checklists/${checklistId}`),
 
-  createVersion: ({projectId, checklistId, data}) => {
-    return send('post', `/api/projects/${projectId}/checklists/${checklistId}/versions`, {
+  createVersion: ({ projectId, checklistId, data }) =>
+    send('post', `/api/projects/${projectId}/checklists/${checklistId}/versions`, {
       data: decamelizeKeys(data),
-    }).then(flattenResponse);
-  },
-
+    }).then(flattenResponse),
 };
 
 export default ServerAPI;

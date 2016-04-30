@@ -1,5 +1,2 @@
-export const getChecklistsByProject = ({projectId, checklists}) => {
-  return checklists.filter((checklist) => {
-    return checklist.get('project') === projectId;
-  });
-};
+export const getChecklistsByProject = ({ projectId, checklists }) =>
+  checklists.filter((checklist) => checklist.get('project') === projectId);

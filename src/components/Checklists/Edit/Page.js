@@ -12,40 +12,36 @@ import ChecklistsForm from 'components/Checklists/Form';
 
 const serializeTestSuiteToEditable = (checklist) =>
   checklist.get('testSuite')
-    .map((testTitle) => {
-      return Immutable.Map()
+    .map((testTitle) =>
+      Immutable.Map()
         .set('id', _.uniqueId('testSuiteRecordId'))
-        .set('title', testTitle);
-    })
+        .set('title', testTitle)
+    )
     .toMap()
-    .mapKeys((key, test) => {
-      return test.get('id');
-    });
+    .mapKeys((key, test) => test.get('id'));
 
-class ChecklistsEditPage extends React.Component {
-  render() {
-    const { project, checklist } = this.props;
-    return (
-      <AppPage
-        id="checklists-edit"
-        title={[
-          <AppHeaderTitleLink key="projects" to="/projects"> Projects </AppHeaderTitleLink>,
-          <AppHeaderTitleLink key="checklist" to={`/projects/${project.get('id')}/checklists`}>
-            { project.get('title') }
-          </AppHeaderTitleLink>,
-          <AppHeaderTitleItem key="new"> Edit Checklist </AppHeaderTitleItem>,
-        ]}
-      >
-        <ChecklistsForm
-          projectId={project.get('id')}
-          title={checklist.get('title')}
-          testSuite={serializeTestSuiteToEditable(checklist)}
-          onClickSave={this.props.onUpdateChecklist}
-        />
-      </AppPage>
-    );
-  }
-}
+const ChecklistsEditPage = (props) => {
+  const { project, checklist, onUpdateChecklist } = props;
+  return (
+    <AppPage
+      id="checklists-edit"
+      title={[
+        <AppHeaderTitleLink key="projects" to="/projects"> Projects </AppHeaderTitleLink>,
+        <AppHeaderTitleLink key="checklist" to={`/projects/${project.get('id')}/checklists`}>
+          {project.get('title')}
+        </AppHeaderTitleLink>,
+        <AppHeaderTitleItem key="new"> Edit Checklist </AppHeaderTitleItem>,
+      ]}
+    >
+      <ChecklistsForm
+        projectId={project.get('id')}
+        title={checklist.get('title')}
+        testSuite={serializeTestSuiteToEditable(checklist)}
+        onClickSave={onUpdateChecklist}
+      />
+    </AppPage>
+  );
+};
 
 ChecklistsEditPage.propTypes = {
   project: React.PropTypes.instanceOf(Project).isRequired,

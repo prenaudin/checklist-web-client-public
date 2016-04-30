@@ -1,17 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import ProfilePage from 'components/Profile/Page';
 import { signout } from 'actions/auth';
 
-class ProfileContainer extends Component {
-  render() {
-    return (
-      <ProfilePage
-        onSignout={this.props.onSignout}
-      />
-    );
-  }
-}
+const ProfileContainer = (props) => <ProfilePage {...props} />;
 
 ProfileContainer.propTypes = {
   onSignout: React.PropTypes.func.isRequired,

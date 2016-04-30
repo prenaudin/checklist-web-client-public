@@ -12,7 +12,7 @@ class ChecklistsEditContainer extends Component {
   }
 
   render() {
-    if ( !this.props.checklist ) { return false; }
+    if (!this.props.checklist) { return false; }
 
     return (
       <ChecklistsEditPage
@@ -44,13 +44,13 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch, ownProps) {
   return {
     init: () => {
-      const {checklistId, projectId} = ownProps.params;
-      dispatch(findChecklist({checklistId, projectId}));
+      const { checklistId, projectId } = ownProps.params;
+      dispatch(findChecklist({ checklistId, projectId }));
     },
 
     onUpdateChecklist: (data) => {
-      const {checklistId, projectId} = ownProps.params;
-      const updateData = _.extend({}, data, {checklistId});
+      const { checklistId, projectId } = ownProps.params;
+      const updateData = _.extend({}, data, { checklistId });
       dispatch(updateChecklist(updateData));
       ownProps.history.pushState(null, `/projects/${projectId}/checklists`);
     },

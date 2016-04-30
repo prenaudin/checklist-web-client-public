@@ -3,20 +3,25 @@ import AuthForm from 'components/Auth/Form';
 import User from 'models/User';
 
 class AuthSignup extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleClickSignup = this.handleClickSignup.bind(this);
+  }
+
   render() {
     return (
       <AuthForm
         id="signup"
-        onSubmit={this.handleClickSignup.bind(this)}
+        onSubmit={this.handleClickSignup}
         user={this.props.user}
         submitLabel="Sign up"
       />
     );
   }
 
-  handleClickSignup({email, password}) {
+  handleClickSignup({ email, password }) {
     const passwordConfirmation = password;
-    this.props.onSignup({email, password, passwordConfirmation});
+    this.props.onSignup({ email, password, passwordConfirmation });
   }
 }
 

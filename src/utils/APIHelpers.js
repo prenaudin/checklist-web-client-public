@@ -8,7 +8,7 @@ const flattenObject = function flattenObject(object) {
   const relationships = _.reduce(object.relationships, (result, value, key) => {
     const formatResult = result;
     if (_.isArray(value.data)) {
-      formatResult[key] = _.pluck(value.data, 'id');
+      formatResult[key] = _.map(value.data, (item) => item.id);
     } else {
       if (value.data) {
         formatResult[key] = value.data.id;

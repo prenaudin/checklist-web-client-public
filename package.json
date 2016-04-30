@@ -90,7 +90,7 @@
     "serve-dev": "NODE_ENV=development $(npm bin)/webpack-dev-server --config ./webpack.development.js --hot --progress --inline --history-api-fallback --cheap-eval-source-map",
     "serve-prod": "NODE_ENV=production node server.prod.js",
     "start": "if [ \"$NODE_ENV\" = \"production\" ]; then npm run serve-prod; else npm run serve-dev; fi",
-    "test": "NODE_ENV=test $(npm bin)/karma start --single-run --no-auto-watch ./karma.config.js",
+    "test": "NODE_ENV=test $(npm bin)/karma start --single-run --no-auto-watch ./karma.config.js && npm run lint",
     "test-watch": "NODE_ENV=test $(npm bin)/karma start ./karma.config.js"
   }
 }

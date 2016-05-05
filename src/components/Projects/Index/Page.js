@@ -9,7 +9,7 @@ const ProjectsIndexPage = (props) => {
     <AppPage
       id="projects-index"
       title={[
-        <AppHeaderTitleLink key="home" to="/"> Checklyst </AppHeaderTitleLink>,
+        <AppHeaderTitleLink key="home" to="/"> Checklist </AppHeaderTitleLink>,
       ]}
     >
       <ul className="projects-list clearfix">

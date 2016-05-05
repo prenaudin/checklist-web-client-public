@@ -15,6 +15,7 @@
 /* 4. Layout-related sections */
 @import 'layout/_header.css';
 @import 'layout/_layout.css';
+@import 'layout/_modal.css';
 
 /* 5. Components */
 @import 'components/_auth.css';
@@ -24,3 +25,4 @@
 @import 'components/_form.css';
 @import 'components/_home.css';
 @import 'components/_projects.css';
+@import 'components/_versions.css';

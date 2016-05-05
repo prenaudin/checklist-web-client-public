@@ -17,7 +17,11 @@ mainConfig.output = {
 
 mainConfig.plugins = [
   extractApplicationStyle,
-  new webpack.optimize.UglifyJsPlugin(),
+  new webpack.optimize.UglifyJsPlugin({
+    compress: {
+      warnings: false
+    }
+  }),
   new webpack.optimize.OccurenceOrderPlugin(),
   // new webpack.ProvidePlugin({
   //   'Promise': 'es6-promise',

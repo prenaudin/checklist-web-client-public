@@ -1,5 +1,5 @@
 import * as APIHelpers from 'utils/APIHelpers';
-import projectsShowFixture from '../fixtures/projects/show';
+import projectsShowFixture from 'api/fixtures/projects/show';
 
 describe('APIHelpers', () => {
   describe('Transform Object keys', () => {

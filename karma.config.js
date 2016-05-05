@@ -15,11 +15,11 @@ module.exports = function karmaConfig(config) {
     autoWatchBatchDelay: 300,
 
     files: [
-      './test/**/*Test.js',
+      './src/**/*-test.js',
     ],
 
     preprocessors: {
-      './test/**/*.js': ['webpack', 'sourcemap'],
+      './src/**/*-test.js': ['webpack', 'sourcemap'],
     },
 
     webpack: webpackConfig,

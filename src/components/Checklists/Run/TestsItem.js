@@ -15,7 +15,7 @@ class ChecklistsRunTestsItem extends React.Component {
       <input
         className="checklists-run-input form-input form-input--md"
         type="text"
-        value={this.props.test.comment}
+        value={this.props.test.get('comment')}
         onChange={this.handleChange}
       />
     );
@@ -40,7 +40,7 @@ class ChecklistsRunTestsItem extends React.Component {
         <label className="checklists-run-label">
           <div className="checklists-run-tests-item-title form-title">
             <Markdown
-              source={this.props.test.get('title')}
+              source={this.props.test.get('title') || ''}
             />
           </div>
           {comment}

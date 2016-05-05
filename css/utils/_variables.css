@@ -10,3 +10,22 @@ $green: #7ED321;
 $green-light: #DBFFA5;
 $orange: #F5A623;
 $orange-light: rgba(245, 166, 35, 0.3);
+
+$screen-sm-min: 480px;
+$screen-md-min: 780px;
+
+$border-radius-large: 3px;
+
+/* Modal */
+$zindex-modal: 1050;
+$zindex-modal-background: 1040;
+$modal-sm: 480px;
+$modal-md: 600px;
+$modal-lg: 700px;
+$modal-backdrop-bg: rgba(255, 255, 255, .94);
+$modal-title-line-height: 1.3em;
+$modal-title-padding: 10px;
+$modal-content-bg: $white;
+$modal-content-border-color: transparent;
+$modal-inner-padding: 50px;
+$modal-footer-border-color: transparent;

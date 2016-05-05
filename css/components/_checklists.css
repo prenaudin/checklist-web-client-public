@@ -89,6 +89,9 @@ li.checklists-list-item--show {
 }
 
 .checklists-list-item-subtitle {
+  display: block;
+  color: #000;
+  text-decoration: none;
   opacity: 0.3;
   font-size: 12px;
   line-height: 16px;

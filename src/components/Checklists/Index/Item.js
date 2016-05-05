@@ -34,14 +34,17 @@ class ChecklistsIndexItem extends React.Component {
   renderDefault() {
     const { lastVersion, checklist } = this.props;
 
-    let lastVersionContent = <span>No version yet</span>;
+    let lastVersionContent = <span className="checklists-list-item-subtitle">No version yet</span>;
     if (lastVersion) {
       lastVersionContent = (
-        <span>
+        <Link
+          className="checklists-list-item-subtitle"
+          to={`/projects/${checklist.get('project')}/checklists/${checklist.get('id')}/versions`}
+        >
           Version {lastVersion.get('title')}
           {' • '}
           {moment(lastVersion.get('updatedAt')).format('DD/MM/YY')}
-        </span>
+        </Link>
       );
     }
 
@@ -60,9 +63,7 @@ class ChecklistsIndexItem extends React.Component {
         <div className="checklists-list-item-title">
           {checklist.get('title')}
         </div>
-        <div className="checklists-list-item-subtitle">
-          {lastVersionContent}
-        </div>
+        {lastVersionContent}
         <div className="checklists-list-item-counters">
           <div className="checklists-list-item-counters-list clearfix">
             <div className="checklists-list-item-counters-item">

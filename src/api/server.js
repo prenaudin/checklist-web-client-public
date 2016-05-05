@@ -101,6 +101,10 @@ const ServerAPI = {
     send('post', `/api/projects/${projectId}/checklists/${checklistId}/versions`, {
       data: decamelizeKeys(data),
     }).then(flattenResponse),
+
+  findVersions: ({ projectId, checklistId }) =>
+    send('get', `/api/projects/${projectId}/checklists/${checklistId}/versions?include=checklist`)
+      .then(flattenResponse),
 };
 
 export default ServerAPI;

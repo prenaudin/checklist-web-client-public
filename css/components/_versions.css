@@ -1,0 +1,43 @@
+.versions-item {
+  display: flex;
+  flex-direction: row;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, .1);
+  color: #000;
+  text-decoration: none;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, .01);
+  }
+}
+
+.versions-item-informations {
+  flex: 1 1 auto;
+}
+
+.versions-item-informations-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.versions-item-informations-date {
+  font-size: 13px;
+  opacity: .3;
+}
+
+ul.versions-item-results {
+  flex: 0 0 240px;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  & > li {
+    display: inline-block;
+    width: 33.333%;
+    padding: 6px 0;
+    font-size: 20px;
+    text-align: right;
+  }
+}

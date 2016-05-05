@@ -1193,6 +1193,11 @@
         }
       }
     },
+    "dom-helpers": {
+      "version": "2.4.0",
+      "from": "dom-helpers@>=2.4.0 <3.0.0",
+      "resolved": "https://registry.npmjs.org/dom-helpers/-/dom-helpers-2.4.0.tgz"
+    },
     "dom-serialize": {
       "version": "2.2.1",
       "from": "dom-serialize@>=2.2.0 <3.0.0",
@@ -3053,6 +3058,11 @@
         }
       }
     },
+    "keycode": {
+      "version": "2.1.1",
+      "from": "keycode@>=2.1.1 <3.0.0",
+      "resolved": "https://registry.npmjs.org/keycode/-/keycode-2.1.1.tgz"
+    },
     "kind-of": {
       "version": "3.0.2",
       "from": "kind-of@>=3.0.2 <4.0.0",
@@ -3084,6 +3094,11 @@
       "version": "4.11.1",
       "from": "lodash@4.11.1",
       "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.11.1.tgz"
+    },
+    "lodash-compat": {
+      "version": "3.10.2",
+      "from": "lodash-compat@>=3.10.2 <4.0.0",
+      "resolved": "https://registry.npmjs.org/lodash-compat/-/lodash-compat-3.10.2.tgz"
     },
     "lodash._baseeach": {
       "version": "4.1.2",
@@ -4705,6 +4720,11 @@
         }
       }
     },
+    "react-bootstrap": {
+      "version": "0.29.3",
+      "from": "react-bootstrap@latest",
+      "resolved": "https://registry.npmjs.org/react-bootstrap/-/react-bootstrap-0.29.3.tgz"
+    },
     "react-deep-force-update": {
       "version": "1.0.1",
       "from": "react-deep-force-update@>=1.0.0 <2.0.0",
@@ -4731,6 +4751,23 @@
           "resolved": "https://registry.npmjs.org/source-map/-/source-map-0.4.4.tgz"
         }
       }
+    },
+    "react-overlays": {
+      "version": "0.6.3",
+      "from": "react-overlays@>=0.6.3 <0.7.0",
+      "resolved": "https://registry.npmjs.org/react-overlays/-/react-overlays-0.6.3.tgz",
+      "dependencies": {
+        "react-prop-types": {
+          "version": "0.2.2",
+          "from": "react-prop-types@>=0.2.1 <0.3.0",
+          "resolved": "https://registry.npmjs.org/react-prop-types/-/react-prop-types-0.2.2.tgz"
+        }
+      }
+    },
+    "react-prop-types": {
+      "version": "0.3.0",
+      "from": "react-prop-types@>=0.3.0 <0.4.0",
+      "resolved": "https://registry.npmjs.org/react-prop-types/-/react-prop-types-0.3.0.tgz"
     },
     "react-proxy": {
       "version": "1.1.8",
@@ -5364,6 +5401,11 @@
       "version": "1.0.2",
       "from": "ultron@>=1.0.0 <1.1.0",
       "resolved": "https://registry.npmjs.org/ultron/-/ultron-1.0.2.tgz"
+    },
+    "uncontrollable": {
+      "version": "3.2.4",
+      "from": "uncontrollable@>=3.2.3 <4.0.0",
+      "resolved": "https://registry.npmjs.org/uncontrollable/-/uncontrollable-3.2.4.tgz"
     },
     "underscore": {
       "version": "1.7.0",

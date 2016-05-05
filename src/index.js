@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import Router from './components/Router';
+import Router from './components/Routes/Router';
 import store from './store/store';
 require('application.css');
 

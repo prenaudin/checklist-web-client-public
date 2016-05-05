@@ -1,3 +1,5 @@
+export const SET_MODAL_RETURN_TO = 'SET_MODAL_RETURN_TO';
+
 export const ERROR = 'ERROR';
 export const RECEIVED_ENTITIES = 'RECEIVED_ENTITIES';
 

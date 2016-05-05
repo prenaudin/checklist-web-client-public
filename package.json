@@ -88,7 +88,7 @@
   "main": "src/index.js",
   "repository": "git@github.com:muxumuxu/checklist-web-client.git",
   "scripts": {
-    "build": "$(npm bin)/webpack --config ./webpack.production.js --verbose --progress --cheap-eval-source-map",
+    "build": "$(npm bin)/webpack --config ./webpack.production.js --display-error-details --debug --cheap-eval-source-map",
     "eslint": "eslint --ext .js,.jsx ./src",
     "lint": "npm run eslint",
     "postinstall": "if [ \"$NODE_ENV\" = \"production\" ]; then npm run build; fi",

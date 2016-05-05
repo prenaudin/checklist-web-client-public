@@ -163,7 +163,13 @@ class ChecklistsRunPage extends React.Component {
   handleClickSave() {
     const data = {
       title: this.state.title,
-      tests: this.state.tests.toList().toJS(),
+      tests: this.state.tests.toList().map((test) => (
+        {
+          title: test.get('title'),
+          status: test.get('status'),
+          comment: test.get('comment'),
+        }
+      )).toJS(),
     };
     this.props.onCreateVersion(data);
   }

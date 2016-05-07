@@ -36,6 +36,7 @@ const ChecklistsEditPage = (props) => {
       <ChecklistsForm
         projectId={project.get('id')}
         title={checklist.get('title')}
+        description={checklist.get('description')}
         testSuite={serializeTestSuiteToEditable(checklist)}
         onClickSave={onUpdateChecklist}
       />

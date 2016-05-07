@@ -2,6 +2,8 @@ import React from 'react';
 import _ from 'lodash';
 import Immutable from 'immutable';
 import { Link } from 'react-router';
+
+import TextareaAutosize from 'react-textarea-autosize';
 import ChecklistsFormTestSuiteItem from 'components/Checklists/Form/TestSuiteItem';
 
 const TestRecord = Immutable.Record({
@@ -15,10 +17,18 @@ const serializeTestSuite = (testSuite) =>
   testSuite.filter((test) => !_.isEmpty(test.get('title')));
 
 class ChecklistsForm extends React.Component {
+  static propTypes = {
+    title: React.PropTypes.string,
+    description: React.PropTypes.string,
+    projectId: React.PropTypes.string.isRequired,
+    testSuite: React.PropTypes.instanceOf(Immutable.Map),
+    onClickSave: React.PropTypes.func.isRequired,
+  }
 
   constructor(props) {
     super(props);
     this.handleChangeTitle = this.handleChangeTitle.bind(this);
+    this.handleChangeDescription = this.handleChangeDescription.bind(this);
     this.handleChangeTestTitle = this.handleChangeTestTitle.bind(this);
     this.handleChangeLastTestTitle = this.handleChangeLastTestTitle.bind(this);
     this.handleClickSave = this.handleClickSave.bind(this);
@@ -26,6 +36,7 @@ class ChecklistsForm extends React.Component {
     const test = createTest();
     this.state = {
       title: props.title || '',
+      description: props.description || '',
       testSuite: props.testSuite || new Immutable.Map().set(test.id, test),
     };
   }
@@ -50,6 +61,20 @@ class ChecklistsForm extends React.Component {
             placeholder="Awesome Checklist"
           />
         </label>
+
+        <label className="checklists-new-label form-group">
+          <div className="form-title">
+            Checklist description
+          </div>
+          <TextareaAutosize
+            className="checklists-new-input form-input"
+            value={this.state.description}
+            onChange={this.handleChangeDescription}
+            placeholder="You can use Markdown and Emoji 🎉"
+          />
+        </label>
+
+        <hr className="form-hr" />
 
         {
           this.state.testSuite.map((test) => {
@@ -96,6 +121,10 @@ class ChecklistsForm extends React.Component {
     this.setState({ title: e.target.value });
   }
 
+  handleChangeDescription(e) {
+    this.setState({ description: e.target.value });
+  }
+
   handleChangeTestTitle(e, id) {
     const newTitle = e.target.value;
     const oldSuite = this.state.testSuite;
@@ -119,6 +148,7 @@ class ChecklistsForm extends React.Component {
     const { projectId } = this.props;
     const data = {
       title: this.state.title,
+      description: this.state.description,
       testSuite: serializeTestSuite(this.state.testSuite).map((test) => (
         test.get('title')
       )).toArray(),
@@ -127,12 +157,5 @@ class ChecklistsForm extends React.Component {
     this.props.onClickSave(data);
   }
 }
-
-ChecklistsForm.propTypes = {
-  title: React.PropTypes.string,
-  projectId: React.PropTypes.string.isRequired,
-  testSuite: React.PropTypes.instanceOf(Immutable.Map),
-  onClickSave: React.PropTypes.func.isRequired,
-};
 
 export default ChecklistsForm;

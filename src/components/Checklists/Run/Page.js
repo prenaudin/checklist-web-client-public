@@ -74,6 +74,10 @@ class ChecklistsRunPage extends React.Component {
             {' - '}
             {this.state.title}
           </div>
+
+          <div className="checklists-run-form-description form-description">
+            {checklist.get('description')}
+          </div>
         </label>
 
         {

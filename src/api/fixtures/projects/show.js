@@ -4,8 +4,8 @@ export default {
     "id": "1",
     "type": "projects",
     "attributes": {
-      "created_at": "2016-03-28T16:45:03.806Z",
-      "updated_at": "2016-03-28T16:45:03.806Z",
+      "created-at": "2016-03-28T16:45:03.806Z",
+      "updated-at": "2016-03-28T16:45:03.806Z",
       "title": "Sample Project"
     },
     "relationships": {
@@ -30,10 +30,10 @@ export default {
       "id": "3",
       "type": "checklists",
       "attributes": {
-        "created_at": "2016-04-03T15:11:13.985Z",
-        "updated_at": "2016-04-03T15:13:54.852Z",
+        "created-at": "2016-04-03T15:11:13.985Z",
+        "updated-at": "2016-04-03T15:13:54.852Z",
         "title": "Everyday",
-        "test_suite": [
+        "test-suite": [
           "Exercise 🏋",
           "Less Ecig 🚭"
         ],

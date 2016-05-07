@@ -8,6 +8,7 @@ const defaultRecord = {
   updatedAt: null,
   type: 'checklists',
   title: '',
+  description: '',
   project: null,
   testSuite: {},
   versions: new Immutable.OrderedSet(),

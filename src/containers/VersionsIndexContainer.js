@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
+
 import VersionsIndexModal from 'components/Versions/Index/Modal';
 import VersionsIndexItem from 'components/Versions/Index/Item';
 import { findVersions } from 'actions/versions';
@@ -16,14 +18,17 @@ class VersionsIndexContainer extends Component {
     return (
       <VersionsIndexModal checklist={checklist}>
         {
-          versions.map((version) => (
-            <VersionsIndexItem
-              key={version.get('id')}
-              projectId={projectId}
-              checklistId={checklistId}
-              version={version}
-            />
-          )).toArray()
+          versions
+            .sort((version) => moment(version.get('createdAt')).unix())
+            .map((version) => (
+              <VersionsIndexItem
+                key={version.get('id')}
+                projectId={projectId}
+                checklistId={checklistId}
+                version={version}
+              />
+            ))
+            .toArray()
         }
       </VersionsIndexModal>
     );

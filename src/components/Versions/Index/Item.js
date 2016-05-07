@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 
 import Version from 'models/Version';
 
-const VersionsIndexModal = (props) => {
+const VersionsIndexModalItem = (props) => {
   const { projectId, checklistId, version } = props;
   return (
     <Link
@@ -38,10 +38,10 @@ const VersionsIndexModal = (props) => {
   );
 };
 
-VersionsIndexModal.propTypes = {
+VersionsIndexModalItem.propTypes = {
   projectId: React.PropTypes.string.isRequired,
   checklistId: React.PropTypes.string.isRequired,
   version: React.PropTypes.instanceOf(Version).isRequired,
 };
 
-export default VersionsIndexModal;
+export default VersionsIndexModalItem;

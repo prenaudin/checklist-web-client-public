@@ -84,7 +84,7 @@ class RoutesComposer extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    modalReturnTo: state.application.get('modalReturnTo'),
+    modalReturnTo: state.application.getModalReturnTo(),
   };
 }
 

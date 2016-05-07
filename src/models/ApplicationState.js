@@ -6,6 +6,12 @@ const defaultRecord = {
   modalReturnTo: null,
 };
 
-const ApplicationState = Record(defaultRecord);
+const ApplicationStateRecord = Record(defaultRecord);
+
+class ApplicationState extends ApplicationStateRecord {
+  getModalReturnTo() {
+    return this.get('modalReturnTo') || '/projects';
+  }
+}
 
 export default ApplicationState;

@@ -13,6 +13,11 @@ const TestRecord = Immutable.Record({
 
 const createTest = () => new TestRecord({ id: _.uniqueId('testSuiteRecordId') });
 
+const appendNewTest = (testSuite) => {
+  const newTest = createTest();
+  return testSuite.set(newTest.id, newTest);
+};
+
 const serializeTestSuite = (testSuite) =>
   testSuite.filter((test) => !_.isEmpty(test.get('title')));
 
@@ -37,7 +42,11 @@ class ChecklistsForm extends React.Component {
     this.state = {
       title: props.title || '',
       description: props.description || '',
-      testSuite: props.testSuite || new Immutable.Map().set(test.id, test),
+      testSuite: (
+        (props.testSuite && appendNewTest(props.testSuite))
+        ||
+        (new Immutable.Map().set(test.id, test))
+      ),
     };
   }
 
@@ -136,10 +145,8 @@ class ChecklistsForm extends React.Component {
   handleChangeLastTestTitle(e, id) {
     const newTitle = e.target.value;
     const oldSuite = this.state.testSuite;
-    const newTest = createTest();
     this.setState({
-      testSuite: oldSuite
-        .set(newTest.id, newTest)
+      testSuite: appendNewTest(oldSuite)
         .set(id, oldSuite.get(id).set('title', newTitle)),
     });
   }

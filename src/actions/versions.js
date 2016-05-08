@@ -7,3 +7,10 @@ export function findVersions({ projectId, checklistId }) {
       dispatch({ type: types.RECEIVED_ENTITIES, entities: resp.entities });
     });
 }
+
+export function findVersion({ projectId, checklistId, versionId }) {
+  return (dispatch) =>
+    api.findVersion({ projectId, checklistId, versionId }).then((resp) => {
+      dispatch({ type: types.RECEIVED_ENTITIES, entities: resp.entities });
+    });
+}

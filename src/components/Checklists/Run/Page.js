@@ -9,6 +9,7 @@ import Checklist from 'models/Checklist';
 import AppPage from 'components/App/Page';
 import AppHeaderTitleLink from 'components/App/HeaderTitleLink';
 import AppHeaderTitleItem from 'components/App/HeaderTitleItem';
+import FormFooter from 'components/Utils/FormFooter';
 import ChecklistsRunTestsItem from './TestsItem';
 
 const TestRecord = Immutable.Record({
@@ -97,46 +98,28 @@ class ChecklistsRunPage extends React.Component {
           }).toArray()
         }
 
-        <div className="form-footer-container">
-          <div className="form-footer clearfix">
-            <div className="form-resume" style={{ marginRight: '30px' }}>
-              <div className="form-resume-count" style={{ color: '#7ED321', fontWeight: '300' }}>
-                {countOk(this.state.tests)}
-              </div>
-              <div className="form-resume-subtitle">
-                👍
-              </div>
+        <FormFooter>
+          <FormFooter.Resume
+            type="ok"
+            count={countOk(this.state.tests)}
+          />
+          <FormFooter.Resume
+            type="nok"
+            count={countNok(this.state.tests)}
+          />
+          <FormFooter.Resume
+            type="pending"
+            count={countPending(this.state.tests)}
+          />
+          <FormFooter.Actions>
+            <Link className="btn btn-default" to={`/projects/${project.get('id')}/checklists`}>
+              Cancel
+            </Link>
+            <div className="btn btn-primary" onClick={this.handleClickSave}>
+              Save
             </div>
-            <div className="form-resume" style={{ marginRight: '30px' }}>
-              <div className="form-resume-count" style={{ color: '#F5A623', fontWeight: '300' }}>
-                {countNok(this.state.tests)}
-              </div>
-              <div className="form-resume-subtitle">
-                👎
-              </div>
-            </div>
-            <div className="form-resume" style={{ marginRight: '30px' }}>
-              <div className="form-resume-count" style={{ color: '#888888', fontWeight: '300' }}>
-                {countPending(this.state.tests)}
-              </div>
-              <div className="form-resume-subtitle">
-                💤
-              </div>
-            </div>
-
-            <div className="checklists-run-actions form-actions">
-              <Link className="btn btn-default" to={`/projects/${project.get('id')}/checklists`}>
-                Cancel
-              </Link>
-              <div
-                className="btn btn-primary"
-                onClick={this.handleClickSave}
-              >
-                Save
-              </div>
-            </div>
-          </div>
-        </div>
+          </FormFooter.Actions>
+        </FormFooter>
       </AppPage>
     );
   }

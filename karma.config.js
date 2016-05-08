@@ -1,7 +1,15 @@
 /*eslint-disable*/
 
 var webpackConfig = require('./webpack.development.js');
-webpackConfig.entry = {};
+var webpackTestConfig = Object.assign({}, webpackConfig, {
+  entry: {},
+  externals: {
+    'cheerio': 'window',
+    'react/addons': true,
+    'react/lib/ExecutionEnvironment': true,
+    'react/lib/ReactContext': true
+  },
+});
 
 module.exports = function karmaConfig(config) {
   config.set({
@@ -22,7 +30,7 @@ module.exports = function karmaConfig(config) {
       './src/**/*-test.js': ['webpack', 'sourcemap'],
     },
 
-    webpack: webpackConfig,
+    webpack: webpackTestConfig,
 
     webpackMiddleware: {
       noInfo: true

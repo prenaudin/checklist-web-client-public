@@ -18,6 +18,12 @@
     cursor: progress;
     opacity: .6;
   }
+
+  .icon {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 10px;
+  }
 }
 
 .btn-default {
@@ -26,6 +32,9 @@
   &:hover {
     color: $purple;
     border-color: $purple;
+    .icon {
+      fill: $purple;
+    }
   }
 }
 
@@ -36,6 +45,9 @@
   &:hover {
     background-color: $purple;
     border-color: $purple;
+    .icon {
+      fill: $purple;
+    }
   }
 }
 

@@ -19,6 +19,7 @@
 
 /* 5. Components */
 @import 'components/_auth.css';
+@import 'components/_icon.css';
 @import 'components/_buttons.css';
 @import 'components/_checklists_run.css';
 @import 'components/_checklists.css';
@@ -26,3 +27,4 @@
 @import 'components/_home.css';
 @import 'components/_projects.css';
 @import 'components/_versions.css';
+@import 'components/_tests.css';

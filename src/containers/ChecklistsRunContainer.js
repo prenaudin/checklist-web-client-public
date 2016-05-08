@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
+
 import ChecklistsRunPage from 'components/Checklists/Run/Page';
 import { createVersion, findChecklist } from 'actions/checklists';
 import Project from 'models/Project';
@@ -50,7 +52,7 @@ function mapDispatchToProps(dispatch, ownProps) {
     onCreateVersion: (data) => {
       const { projectId, checklistId } = ownProps.params;
       dispatch(createVersion({ projectId, checklistId, data }));
-      ownProps.history.push(`/projects/${projectId}/checklists`);
+      browserHistory.push(`/projects/${projectId}/checklists`);
     },
   };
 }

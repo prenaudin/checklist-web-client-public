@@ -98,13 +98,23 @@ const ServerAPI = {
     send('delete', `/api/projects/${projectId}/checklists/${checklistId}`),
 
   createVersion: ({ projectId, checklistId, data }) =>
-    send('post', `/api/projects/${projectId}/checklists/${checklistId}/versions`, {
-      data: decamelizeKeys(data),
-    }).then(flattenResponse),
+    send(
+      'post',
+      `/api/projects/${projectId}/checklists/${checklistId}/versions?include=checklist`,
+      {
+        data: decamelizeKeys(data),
+      }
+    ).then(flattenResponse),
 
   findVersions: ({ projectId, checklistId }) =>
     send('get', `/api/projects/${projectId}/checklists/${checklistId}/versions?include=checklist`)
       .then(flattenResponse),
+
+  findVersion: ({ projectId, checklistId, versionId }) =>
+    send(
+      'get',
+      `/api/projects/${projectId}/checklists/${checklistId}/versions/${versionId}?include=checklist`
+    ).then(flattenResponse),
 };
 
 export default ServerAPI;

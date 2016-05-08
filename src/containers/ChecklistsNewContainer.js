@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
+
 import ChecklistsNewPage from 'components/Checklists/New/Page';
 import { addChecklist } from 'actions/checklists';
 import Project from 'models/Project';
@@ -26,7 +28,7 @@ function mapDispatchToProps(dispatch, ownProps) {
     onAddChecklist: (data) => {
       const { projectId } = ownProps.params;
       dispatch(addChecklist(data));
-      ownProps.history.push(`/projects/${projectId}/checklists`);
+      browserHistory.push(`/projects/${projectId}/checklists`);
     },
   };
 }

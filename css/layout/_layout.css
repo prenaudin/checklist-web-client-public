@@ -15,3 +15,11 @@
   width: 21px;
   height: 21px;
 }
+
+p {
+  margin: 0 0 6px 0;
+}
+
+.text-muted {
+  opacity: .4;
+}

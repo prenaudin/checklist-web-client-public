@@ -12,19 +12,19 @@ const ChecklistsRunPoll = (props) => {
       <ChecklistsRunPollItem
         label="👍"
         status="ok"
-        enabled={status === 'ok'}
+        isEnabled={status === 'ok'}
         onClick={() => onClickItem('ok')}
       />
       <ChecklistsRunPollItem
         label="👎"
         status="nok"
-        enabled={status === 'nok'}
+        isEnabled={status === 'nok'}
         onClick={() => onClickItem('nok')}
       />
       <ChecklistsRunPollItem
         label="💤"
         status="pending"
-        enabled={status === 'pending'}
+        isEnabled={status === 'pending'}
         onClick={() => onClickItem('pending')}
       />
     </div>

@@ -5,10 +5,9 @@ const Icon = (props) => {
   const iconId = `icon-${props.id}`;
   const href = `${iconsImgSrc}#${iconId}`;
   return (
-    <svg
-      className="icon"
-      dangerouslySetInnerHTML={{ __html: `<use xlink:href="${href}"/>` }}
-    />
+    <svg className="icon">
+      <use xlinkHref={href} />
+    </svg>
   );
 };
 

@@ -8,14 +8,14 @@ const {
 const ChecklistsRunPollItem = ({
   status,
   onClick,
-  enabled,
+  isEnabled,
   label,
 }) => {
   const className = classNames(
     'checklists-poll-item',
     `checklists-poll-item--${status}`,
     {
-      'is-enabled': enabled,
+      'is-enabled': isEnabled,
     }
   );
 
@@ -32,12 +32,12 @@ const ChecklistsRunPollItem = ({
 ChecklistsRunPollItem.propTypes = {
   label: PropTypes.string.isRequired,
   status: PropTypes.string.isRequired,
-  enabled: PropTypes.bool,
+  isEnabled: PropTypes.bool,
   onClick: PropTypes.func.isRequired,
 };
 
 ChecklistsRunPollItem.defaultProps = {
-  enabled: false,
+  isEnabled: false,
 };
 
 export default ChecklistsRunPollItem;

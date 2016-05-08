@@ -1,0 +1,42 @@
+.tests-results-item {
+  display: flex;
+  border-bottom: 1px solid rgba(0,0,0, .1);
+  padding-bottom: 18px;
+  margin-bottom: 18px;
+}
+
+.tests-results-item-label {
+  flex: 1 1 auto;
+  margin-left: 16px;
+}
+
+.tests-results-item-poll {
+ flex: 0 0 auto;
+}
+
+.tests-results-item-poll-item {
+  display: inline-block;
+  padding: 8px 30px;
+  line-height: 30px;
+  font-size: 24px;
+  border: 1px solid rgba(0,0,0,0.10);
+  border-radius: 3px;
+
+  &.is-enabled.tests-results-item-poll-item--ok {
+    border-color: $green;
+    background-color: $green-light;
+  }
+
+  &.is-enabled.tests-results-item-poll-item--nok {
+    border-color: $orange;
+    background-color: $orange-light;
+  }
+
+  &.is-enabled.tests-results-item-poll-item--pending {
+    background-color: #F3F3F3;
+  }
+}
+
+.tests-results-item-poll-item + .tests-results-item-poll-item {
+  margin-left: 4px;
+}

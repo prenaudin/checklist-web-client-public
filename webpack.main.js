@@ -26,7 +26,11 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.jsx?$/,
+        test: /\.json$/,
+        loader: "json-loader"
+      },
+      {
+        test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel?presets[]=react,presets[]=es2015,plugins[]=transform-class-properties'
       },

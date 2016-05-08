@@ -9,6 +9,7 @@ import ChecklistsIndexContainer from 'containers/ChecklistsIndexContainer';
 import ChecklistsNewContainer from 'containers/ChecklistsNewContainer';
 import ChecklistsEditContainer from 'containers/ChecklistsEditContainer';
 import ChecklistsRunContainer from 'containers/ChecklistsRunContainer';
+import VersionsShowContainer from 'containers/VersionsShowContainer';
 
 const RoutesApp = (
   <Route isPage component={App}>
@@ -24,6 +25,7 @@ const RoutesApp = (
       <Route path="new" component={ChecklistsNewContainer} />
       <Route path=":checklistId/edit" component={ChecklistsEditContainer} />
       <Route path=":checklistId/run" component={ChecklistsRunContainer} />
+      <Route path=":checklistId/versions/:versionId" component={VersionsShowContainer} />
     </Route>
   </Route>
 );

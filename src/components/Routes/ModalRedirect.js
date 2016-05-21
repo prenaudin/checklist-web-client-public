@@ -39,6 +39,10 @@ class RoutesModalRedirect extends React.Component {
             from="/projects/:projectId/checklists/:checklistId/versions"
             to="/projects/:projectId/checklists"
           />
+          <Redirect
+            from="/projects/:projectId/checklists/:checklistId/versions/:versionId/share"
+            to="/projects/:projectId/checklists/:checklistId/versions/:versionId"
+          />
         </Route>
       </Router>
     );

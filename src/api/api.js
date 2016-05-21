@@ -115,6 +115,25 @@ const ServerAPI = {
       'get',
       `/api/projects/${projectId}/checklists/${checklistId}/versions/${versionId}?include=checklist`
     ).then(flattenResponse),
+
+  findPublicVersion: ({ versionSlug }) =>
+    send(
+      'get',
+      `/public/versions/${versionSlug}?include=checklist`
+    ).then(flattenResponse),
+
+  shareVersion: ({ projectId, checklistId, versionId }) =>
+    send(
+      'post',
+      `/api/projects/${projectId}/checklists/${checklistId}/versions/${versionId}/share`
+    ).then(flattenResponse),
+
+  unshareVersion: ({ projectId, checklistId, versionId }) =>
+    send(
+      'delete',
+      // eslint-disable-next-line
+      `/api/projects/${projectId}/checklists/${checklistId}/versions/${versionId}/share`
+    ).then(flattenResponse),
 };
 
 export default ServerAPI;

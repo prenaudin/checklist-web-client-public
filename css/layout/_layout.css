@@ -1,7 +1,16 @@
-.app {
+.app,
+.page-public {
   max-width: 784px;
   margin: 0 auto;
   padding-bottom: 200px;
+}
+
+.page-public {
+  margin-top: 40px;
+}
+
+.page-title {
+  font-size: 26px;
 }
 
 .footer {

@@ -13,33 +13,65 @@ import TestsResultsItem from 'components/Tests/Results/Item';
 import Icon from 'components/Utils/Icon';
 
 const VersionsShowPage = (props) => {
-  const { projectId, checklist, version } = props;
+  const { projectId, checklist, version, isPublic } = props;
+  const checklistId = checklist.get('id');
+  const versionId = version.get('id');
+  let title = false;
+  let actions = false;
+
+  if (!isPublic) {
+    title = [
+      <AppHeaderTitleLink key="projects" to="/projects">
+        Projects
+      </AppHeaderTitleLink>,
+      <AppHeaderTitleLink
+        key="checklists"
+        to={`/projects/${projectId}/checklists`}
+      >
+        {checklist.get('title')}
+      </AppHeaderTitleLink>,
+      <AppHeaderTitleLink
+        key="versions"
+        to={`/projects/${projectId}/checklists/${checklist.get('id')}/versions`}
+      >
+        Versions
+      </AppHeaderTitleLink>,
+      <AppHeaderTitleItem key="version">
+        {version.get('title')}
+      </AppHeaderTitleItem>,
+    ];
+  }
+
+  if (isPublic) {
+    actions = (
+      <Link
+        className="btn btn-default"
+        to={`/projects/${projectId}/checklists/${checklistId}/versions/${versionId}/copy`}
+      >
+        <Icon id="duplicate" />
+        Copy
+      </Link>
+    );
+  } else {
+    actions = (
+      <Link
+        className="btn btn-default"
+        to={`/projects/${projectId}/checklists/${checklistId}/versions/${versionId}/share`}
+      >
+        <Icon id="share" />
+        Share
+      </Link>
+    );
+  }
+
   return (
     <AppPage
       id="versions-show"
-      title={[
-        <AppHeaderTitleLink key="projects" to="/projects">
-          Projects
-        </AppHeaderTitleLink>,
-        <AppHeaderTitleLink
-          key="checklists"
-          to={`/projects/${projectId}/checklists`}
-        >
-          {checklist.get('title')}
-        </AppHeaderTitleLink>,
-        <AppHeaderTitleLink
-          key="versions"
-          to={`/projects/${projectId}/checklists/${checklist.get('id')}/versions`}
-        >
-          Versions
-        </AppHeaderTitleLink>,
-        <AppHeaderTitleItem key="version">
-          {version.get('title')}
-        </AppHeaderTitleItem>,
-      ]}
+      title={title}
+      isPublic={isPublic}
     >
       <label className="form-group">
-        <div className="form-title">
+        <div className="form-title page-title">
           {checklist.get('title')}
         </div>
 
@@ -74,13 +106,7 @@ const VersionsShowPage = (props) => {
           count={version.getPendingCount()}
         />
         <FormFooter.Actions>
-          <Link
-            className="btn btn-default"
-            to={`/projects/${projectId}/checklists/${checklist.get('id')}/share`}
-          >
-            <Icon id="share" />
-            Share
-          </Link>
+          {actions}
         </FormFooter.Actions>
       </FormFooter>
     </AppPage>
@@ -91,6 +117,7 @@ VersionsShowPage.propTypes = {
   projectId: React.PropTypes.string.isRequired,
   checklist: React.PropTypes.instanceOf(Checklist).isRequired,
   version: React.PropTypes.instanceOf(Version).isRequired,
+  isPublic: React.PropTypes.bool.isRequired,
 };
 
 export default VersionsShowPage;

@@ -27,4 +27,16 @@ describe('Version Model', () => {
       expect(version.getPendingCount()).to.equal(1);
     });
   });
+
+  describe('Version isShared', () => {
+    const version = new Version();
+
+    it('isnt public if no public slug', () => {
+      expect(version.isPublic()).to.equal(false);
+    });
+
+    it('is public if public slug is defined', () => {
+      expect(version.set('publicSlug', 'xxx').isPublic()).to.equal(true);
+    });
+  });
 });

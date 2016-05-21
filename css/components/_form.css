@@ -8,6 +8,10 @@
   margin-bottom: 6px;
 }
 
+.form-title.page-title {
+  font-size: 26px;
+}
+
 .form-description {
   opacity: 0.4;
   color: #000000;

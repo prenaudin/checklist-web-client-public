@@ -10,6 +10,7 @@ const defaultRecord = {
   title: '',
   checklist: null,
   tests: {},
+  publicSlug: null,
 };
 
 const VersionRecord = Record(defaultRecord);
@@ -38,6 +39,10 @@ class Version extends VersionRecord {
 
   getPendingCount() {
     return getTestsCount(this, 'pending');
+  }
+
+  isPublic() {
+    return this.get('publicSlug') !== null;
   }
 }
 

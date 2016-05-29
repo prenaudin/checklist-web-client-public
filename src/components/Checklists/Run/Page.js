@@ -33,7 +33,7 @@ const initTests = (testSuite) => (
   _.reduce(testSuite, (memo, testTitle) => {
     const newTest = createTest({ title: testTitle });
     return memo.set(newTest.id, newTest);
-  }, new Immutable.Map())
+  }, new Immutable.OrderedMap())
 );
 
 class ChecklistsRunPage extends React.Component {

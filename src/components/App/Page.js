@@ -24,7 +24,7 @@ AppPage.propTypes = {
   children: React.PropTypes.any.isRequired,
   title: React.PropTypes.any,
   id: React.PropTypes.string.isRequired,
-  isPublic: React.PropTypes.bool.isRequired,
+  isPublic: React.PropTypes.bool,
 };
 
 export default AppPage;

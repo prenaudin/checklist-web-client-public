@@ -26,7 +26,7 @@ class ChecklistsForm extends React.Component {
     title: React.PropTypes.string,
     description: React.PropTypes.string,
     projectId: React.PropTypes.string.isRequired,
-    testSuite: React.PropTypes.instanceOf(Immutable.Map),
+    testSuite: React.PropTypes.instanceOf(Immutable.OrderedMap),
     onClickSave: React.PropTypes.func.isRequired,
   }
 
@@ -45,7 +45,7 @@ class ChecklistsForm extends React.Component {
       testSuite: (
         (props.testSuite && appendNewTest(props.testSuite))
         ||
-        (new Immutable.Map().set(test.id, test))
+        (new Immutable.OrderedMap().set(test.id, test))
       ),
     };
   }

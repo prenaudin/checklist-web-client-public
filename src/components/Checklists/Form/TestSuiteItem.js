@@ -35,7 +35,7 @@ class ChecklistsFormTestSuiteItem extends React.Component {
 
 ChecklistsFormTestSuiteItem.propTypes = {
   test: React.PropTypes.oneOfType([
-    React.PropTypes.instanceOf(Immutable.Map),
+    React.PropTypes.instanceOf(Immutable.OrderedMap),
     React.PropTypes.instanceOf(Immutable.Record),
   ]),
   index: React.PropTypes.number.isRequired,

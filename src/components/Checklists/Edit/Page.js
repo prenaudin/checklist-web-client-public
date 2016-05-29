@@ -13,7 +13,7 @@ import ChecklistsForm from 'components/Checklists/Form';
 const serializeTestSuiteToEditable = (checklist) =>
   checklist.get('testSuite')
     .map((testTitle) =>
-      Immutable.Map()
+      Immutable.OrderedMap()
         .set('id', _.uniqueId('testSuiteRecordId'))
         .set('title', testTitle)
     )
